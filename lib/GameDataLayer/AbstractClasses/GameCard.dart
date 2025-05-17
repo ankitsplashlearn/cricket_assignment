@@ -20,4 +20,9 @@ abstract class GameCard with GameCardIdCounter {
     }
     return null;
   }
+
+  @override
+  String toString() {
+    return "Game Card: id = $id, name = $name, attributes = ${attributes.toString()}";
+  }
 }

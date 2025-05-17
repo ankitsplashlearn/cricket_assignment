@@ -1,0 +1,4 @@
+enum GameModeEnum{
+  playerVsComputer,
+  playerVsPlayer;
+}

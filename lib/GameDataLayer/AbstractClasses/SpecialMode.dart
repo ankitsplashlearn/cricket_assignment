@@ -1,6 +1,6 @@
 abstract class SpecialMode {
-  int damageToReceive;
-  int damageToApply;
+  final double damageToReceive;
+  final double damageToApply;
 
   bool isUsed = false;
   bool isActiveNow = false;

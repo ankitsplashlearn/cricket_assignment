@@ -9,4 +9,9 @@ abstract class CardAttribute {
   CardThrowResult compare(CardAttribute other) {
     return CardThrowResult.compare(this, other, cardComparator);
   }
+
+  @override
+  String toString() {
+    return "Card Attribute: name = $name, cardValue = ${cardValue.toString()}, cardComparator = ${cardComparator.toString()}";
+  }
 }

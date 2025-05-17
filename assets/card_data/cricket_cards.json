@@ -2,23 +2,221 @@
   {
     "name": "Virat Kohli",
     "attributes": [
-      { "type": "Runs", "value": 1000, "comparator": 0 },
-      { "type": "Matches", "value": 1000, "comparator": 0 },
-      { "type": "Centuries", "value": 50, "comparator": 0 },
-      { "type": "Half Centuries", "value": 50, "comparator": 0 },
-      { "type": "Catches", "value": 200, "comparator": 0 },
-      { "type": "Wickets", "value": 10, "comparator": 0 }
+      { "type": "Runs", "value": 12500, "comparator": 0 },
+      { "type": "Matches", "value": 270, "comparator": 0 },
+      { "type": "Centuries", "value": 46, "comparator": 0 },
+      { "type": "Half Centuries", "value": 65, "comparator": 0 },
+      { "type": "Catches", "value": 140, "comparator": 0 },
+      { "type": "Wickets", "value": 5, "comparator": 0 }
     ]
   },
   {
     "name": "MS Dhoni",
     "attributes": [
-      { "type": "Runs", "value": 900, "comparator": 0 },
-      { "type": "Matches", "value": 950, "comparator": 0 },
+      { "type": "Runs", "value": 10700, "comparator": 0 },
+      { "type": "Matches", "value": 350, "comparator": 0 },
+      { "type": "Centuries", "value": 10, "comparator": 0 },
+      { "type": "Half Centuries", "value": 73, "comparator": 0 },
+      { "type": "Catches", "value": 320, "comparator": 0 },
+      { "type": "Wickets", "value": 2, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Sachin Tendulkar",
+    "attributes": [
+      { "type": "Runs", "value": 18426, "comparator": 0 },
+      { "type": "Matches", "value": 463, "comparator": 0 },
+      { "type": "Centuries", "value": 49, "comparator": 0 },
+      { "type": "Half Centuries", "value": 96, "comparator": 0 },
+      { "type": "Catches", "value": 140, "comparator": 0 },
+      { "type": "Wickets", "value": 154, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Ricky Ponting",
+    "attributes": [
+      { "type": "Runs", "value": 13704, "comparator": 0 },
+      { "type": "Matches", "value": 375, "comparator": 0 },
       { "type": "Centuries", "value": 30, "comparator": 0 },
-      { "type": "Half Centuries", "value": 60, "comparator": 0 },
-      { "type": "Catches", "value": 350, "comparator": 0 },
-      { "type": "Wickets", "value": 5, "comparator": 0 }
+      { "type": "Half Centuries", "value": 82, "comparator": 0 },
+      { "type": "Catches", "value": 160, "comparator": 0 },
+      { "type": "Wickets", "value": 3, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Jacques Kallis",
+    "attributes": [
+      { "type": "Runs", "value": 11579, "comparator": 0 },
+      { "type": "Matches", "value": 328, "comparator": 0 },
+      { "type": "Centuries", "value": 17, "comparator": 0 },
+      { "type": "Half Centuries", "value": 86, "comparator": 0 },
+      { "type": "Catches", "value": 131, "comparator": 0 },
+      { "type": "Wickets", "value": 273, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Kumar Sangakkara",
+    "attributes": [
+      { "type": "Runs", "value": 14234, "comparator": 0 },
+      { "type": "Matches", "value": 404, "comparator": 0 },
+      { "type": "Centuries", "value": 25, "comparator": 0 },
+      { "type": "Half Centuries", "value": 93, "comparator": 0 },
+      { "type": "Catches", "value": 402, "comparator": 0 },
+      { "type": "Wickets", "value": 0, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "AB de Villiers",
+    "attributes": [
+      { "type": "Runs", "value": 9577, "comparator": 0 },
+      { "type": "Matches", "value": 228, "comparator": 0 },
+      { "type": "Centuries", "value": 25, "comparator": 0 },
+      { "type": "Half Centuries", "value": 53, "comparator": 0 },
+      { "type": "Catches", "value": 176, "comparator": 0 },
+      { "type": "Wickets", "value": 2, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Brian Lara",
+    "attributes": [
+      { "type": "Runs", "value": 10405, "comparator": 0 },
+      { "type": "Matches", "value": 299, "comparator": 0 },
+      { "type": "Centuries", "value": 19, "comparator": 0 },
+      { "type": "Half Centuries", "value": 63, "comparator": 0 },
+      { "type": "Catches", "value": 120, "comparator": 0 },
+      { "type": "Wickets", "value": 4, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Steve Smith",
+    "attributes": [
+      { "type": "Runs", "value": 4939, "comparator": 0 },
+      { "type": "Matches", "value": 128, "comparator": 0 },
+      { "type": "Centuries", "value": 12, "comparator": 0 },
+      { "type": "Half Centuries", "value": 25, "comparator": 0 },
+      { "type": "Catches", "value": 75, "comparator": 0 },
+      { "type": "Wickets", "value": 17, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Ben Stokes",
+    "attributes": [
+      { "type": "Runs", "value": 2925, "comparator": 0 },
+      { "type": "Matches", "value": 105, "comparator": 0 },
+      { "type": "Centuries", "value": 4, "comparator": 0 },
+      { "type": "Half Centuries", "value": 20, "comparator": 0 },
+      { "type": "Catches", "value": 90, "comparator": 0 },
+      { "type": "Wickets", "value": 74, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "David Warner",
+    "attributes": [
+      { "type": "Runs", "value": 5455, "comparator": 0 },
+      { "type": "Matches", "value": 140, "comparator": 0 },
+      { "type": "Centuries", "value": 18, "comparator": 0 },
+      { "type": "Half Centuries", "value": 23, "comparator": 0 },
+      { "type": "Catches", "value": 80, "comparator": 0 },
+      { "type": "Wickets", "value": 0, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Rohit Sharma",
+    "attributes": [
+      { "type": "Runs", "value": 9825, "comparator": 0 },
+      { "type": "Matches", "value": 243, "comparator": 0 },
+      { "type": "Centuries", "value": 30, "comparator": 0 },
+      { "type": "Half Centuries", "value": 45, "comparator": 0 },
+      { "type": "Catches", "value": 100, "comparator": 0 },
+      { "type": "Wickets", "value": 8, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Kane Williamson",
+    "attributes": [
+      { "type": "Runs", "value": 6554, "comparator": 0 },
+      { "type": "Matches", "value": 155, "comparator": 0 },
+      { "type": "Centuries", "value": 16, "comparator": 0 },
+      { "type": "Half Centuries", "value": 42, "comparator": 0 },
+      { "type": "Catches", "value": 98, "comparator": 0 },
+      { "type": "Wickets", "value": 6, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Joe Root",
+    "attributes": [
+      { "type": "Runs", "value": 6000, "comparator": 0 },
+      { "type": "Matches", "value": 160, "comparator": 0 },
+      { "type": "Centuries", "value": 15, "comparator": 0 },
+      { "type": "Half Centuries", "value": 40, "comparator": 0 },
+      { "type": "Catches", "value": 82, "comparator": 0 },
+      { "type": "Wickets", "value": 15, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Shakib Al Hasan",
+    "attributes": [
+      { "type": "Runs", "value": 6000, "comparator": 0 },
+      { "type": "Matches", "value": 220, "comparator": 0 },
+      { "type": "Centuries", "value": 9, "comparator": 0 },
+      { "type": "Half Centuries", "value": 42, "comparator": 0 },
+      { "type": "Catches", "value": 95, "comparator": 0 },
+      { "type": "Wickets", "value": 270, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Yuvraj Singh",
+    "attributes": [
+      { "type": "Runs", "value": 8701, "comparator": 0 },
+      { "type": "Matches", "value": 304, "comparator": 0 },
+      { "type": "Centuries", "value": 14, "comparator": 0 },
+      { "type": "Half Centuries", "value": 52, "comparator": 0 },
+      { "type": "Catches", "value": 96, "comparator": 0 },
+      { "type": "Wickets", "value": 111, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Babar Azam",
+    "attributes": [
+      { "type": "Runs", "value": 5400, "comparator": 0 },
+      { "type": "Matches", "value": 120, "comparator": 0 },
+      { "type": "Centuries", "value": 17, "comparator": 0 },
+      { "type": "Half Centuries", "value": 24, "comparator": 0 },
+      { "type": "Catches", "value": 62, "comparator": 0 },
+      { "type": "Wickets", "value": 0, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Glenn Maxwell",
+    "attributes": [
+      { "type": "Runs", "value": 3500, "comparator": 0 },
+      { "type": "Matches", "value": 120, "comparator": 0 },
+      { "type": "Centuries", "value": 3, "comparator": 0 },
+      { "type": "Half Centuries", "value": 20, "comparator": 0 },
+      { "type": "Catches", "value": 80, "comparator": 0 },
+      { "type": "Wickets", "value": 60, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Mohammad Nabi",
+    "attributes": [
+      { "type": "Runs", "value": 3200, "comparator": 0 },
+      { "type": "Matches", "value": 140, "comparator": 0 },
+      { "type": "Centuries", "value": 1, "comparator": 0 },
+      { "type": "Half Centuries", "value": 15, "comparator": 0 },
+      { "type": "Catches", "value": 60, "comparator": 0 },
+      { "type": "Wickets", "value": 130, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "Trent Boult",
+    "attributes": [
+      { "type": "Runs", "value": 500, "comparator": 0 },
+      { "type": "Matches", "value": 100, "comparator": 0 },
+      { "type": "Centuries", "value": 0, "comparator": 0 },
+      { "type": "Half Centuries", "value": 2, "comparator": 0 },
+      { "type": "Catches", "value": 30, "comparator": 0 },
+      { "type": "Wickets", "value": 190, "comparator": 0 }
     ]
   }
 ]
