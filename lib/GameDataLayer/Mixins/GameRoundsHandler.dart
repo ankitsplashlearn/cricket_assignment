@@ -1,5 +1,5 @@
-import 'package:cricket_card/Classes/AbstractClasses/Player.dart';
-import 'package:cricket_card/Classes/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 
 mixin GameRoundsHandler{
   void selectCardForCurrentPlayer(Player player);

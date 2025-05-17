@@ -1,5 +1,5 @@
-import 'package:cricket_card/Classes/AbstractClasses/Player.dart';
-import 'package:cricket_card/Classes/Mixins/GameRoundsHandler.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+import 'package:cricket_card/GameDataLayer/Mixins/GameRoundsHandler.dart';
 
 class GameManager with GameRoundsHandler{
   List<Player> players;
