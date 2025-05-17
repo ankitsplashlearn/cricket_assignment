@@ -1,4 +1,5 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
+import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class WicketCardAttribute extends CardAttribute{
@@ -8,10 +9,8 @@ class WicketCardAttribute extends CardAttribute{
   @override
   String name;
 
-  WicketCardAttribute({required this.name, required this.cardValue});
-
   @override
-  CardThrowResult compare(CardAttribute other) {
-    return CardThrowResult.compareHigherWins(this, other);
-  }
+  CardComparator cardComparator;
+
+  WicketCardAttribute({required this.name, required this.cardValue, required this.cardComparator});
 }

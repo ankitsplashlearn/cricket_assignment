@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Virat Kohli",
+    "attributes": [
+      { "type": "Runs", "value": 1000, "comparator": 0 },
+      { "type": "Matches", "value": 1000, "comparator": 0 },
+      { "type": "Centuries", "value": 50, "comparator": 0 },
+      { "type": "Half Centuries", "value": 50, "comparator": 0 },
+      { "type": "Catches", "value": 200, "comparator": 0 },
+      { "type": "Wickets", "value": 10, "comparator": 0 }
+    ]
+  },
+  {
+    "name": "MS Dhoni",
+    "attributes": [
+      { "type": "Runs", "value": 900, "comparator": 0 },
+      { "type": "Matches", "value": 950, "comparator": 0 },
+      { "type": "Centuries", "value": 30, "comparator": 0 },
+      { "type": "Half Centuries", "value": 60, "comparator": 0 },
+      { "type": "Catches", "value": 350, "comparator": 0 },
+      { "type": "Wickets", "value": 5, "comparator": 0 }
+    ]
+  }
+]

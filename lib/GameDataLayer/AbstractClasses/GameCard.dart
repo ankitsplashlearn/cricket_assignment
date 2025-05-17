@@ -8,6 +8,7 @@ abstract class GameCard with GameCardIdCounter {
 
   GameCard({required this.name, required List<CardAttribute> attributes}) {
     id = nextCount;
+    this.attributes = {};
     for (var attribute in attributes) {
       this.attributes.putIfAbsent(attribute.name, () => attribute);
     }

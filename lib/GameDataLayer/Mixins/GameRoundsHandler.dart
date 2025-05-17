@@ -1,9 +1,10 @@
-import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
-import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 
 mixin GameRoundsHandler{
-  void selectCardForCurrentPlayer(Player player);
-  void selectCardAttributeForCurrentPlayer(Player player);
-  void activateSpecialModeForCurrentPlayer(Player player);
-  void applyCurrentPlayerThrow(Player player);
+  void selectCardForCurrentPlayer(GameCard gameCard);
+  void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute);
+  void enableSpecialModeForCurrentPlayer();
+  void disableSpecialModeForCurrentPlayer();
+  void applyCurrentPlayerThrow();
 }
