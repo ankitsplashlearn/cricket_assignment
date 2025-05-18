@@ -117,12 +117,12 @@ Widget gameCardWidget({
 }) {
   List<Widget> cardAttributeWidgets = [];
 
-  cardAttributeWidgets.add(_keyValueRichText("Name", gameCard.name));
+  cardAttributeWidgets.add(keyValueRichText("Name", gameCard.name));
 
   for (var entry in gameCard.attributes.entries) {
     CardAttribute attribute = entry.value;
 
-    Widget cardAttributeWidget = _keyValueRichText(
+    Widget cardAttributeWidget = keyValueRichText(
       attribute.name,
       attribute.cardValue.toString(),
     );
@@ -149,7 +149,7 @@ Widget gameCardWidget({
   );
 }
 
-Widget _keyValueRichText(String title, String value) {
+Widget keyValueRichText(String title, String value) {
   return RichText(
     text: TextSpan(
       text: "$title : ",

@@ -98,4 +98,9 @@ class GameManager with GameRoundsHandler{
   bool isPlayerRemainingToThrowInCurrentRound() {
     return _currentTurnOffset != _players.length - 1;
   }
+
+  @override
+  int getCurrentRound() {
+    return _currentGameRound + 1;
+  }
 }

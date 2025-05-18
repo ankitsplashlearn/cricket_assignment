@@ -65,18 +65,21 @@ class _GameScreenState extends State<GameScreen> {
         _gameScreenController.inputManager.getFirstThrowPlayerForCurrentRound();
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _currentPlayerDetail("Current turn: ", currentPlayer.name),
-        _currentPlayerDetail(
-          "Health: ",
+        keyValueRichText("Current turn", currentPlayer.name),
+        keyValueRichText(
+          "Health",
           currentPlayer.playerHealth.health.toString(),
         ),
+        keyValueRichText(
+          "Game Round",
+          _gameScreenController.inputManager.getCurrentRound().toString(),
+        ),
         if (currentPlayer != firstThrowPlayer)
-          _currentPlayerDetail(
-            "Attribute selected by ${firstThrowPlayer.name} : ",
+          keyValueRichText(
+            "Attribute selected by ${firstThrowPlayer.name}",
             firstThrowPlayer.getSelectedCardAttribute().name,
           ),
         Expanded(
@@ -86,24 +89,6 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _currentPlayerDetail(String title, String value) {
-    return RichText(
-      text: TextSpan(
-        text: title,
-        children: [
-          TextSpan(
-            text: value,
-            style: TextStyleUtil.yellowTextStyle(
-              fontSize: fontSize,
-              bold: true,
-            ),
-          ),
-        ],
-        style: TextStyleUtil.whiteTextStyle(fontSize: fontSize),
-      ),
     );
   }
 
@@ -125,9 +110,7 @@ class _GameScreenState extends State<GameScreen> {
                   _gameScreenController.inputManager
                       .selectCardAttributeForCurrentPlayer(cardAttribute);
 
-                  //This step is responsible for moving to next player throw or next round
-                  _gameScreenController.inputManager.moveToNextApplicableStep();
-                  setState(() {});
+                  _moveToNextTurnOrRound();
                 },
                 attributeTapActive: true,
               ),
@@ -142,9 +125,13 @@ class _GameScreenState extends State<GameScreen> {
                   gameCards: currentPlayer.availableCards,
                   cardTapCallback: (gameCard) {
                     localSetState(() {
-                      cardSelected = true;
-                      _gameScreenController.inputManager
-                          .selectCardForCurrentPlayer(gameCard);
+                      if (currentPlayer == firstThrowPlayer) {
+                        cardSelected = true;
+                        _gameScreenController.inputManager
+                            .selectCardForCurrentPlayer(gameCard);
+                      } else {
+                        _moveToNextTurnOrRound();
+                      }
                     });
                   },
                 ),
@@ -152,5 +139,11 @@ class _GameScreenState extends State<GameScreen> {
             );
       },
     );
+  }
+
+  void _moveToNextTurnOrRound() {
+    //This step is responsible for moving to next player throw or next round
+    _gameScreenController.inputManager.moveToNextApplicableStep();
+    setState(() {});
   }
 }

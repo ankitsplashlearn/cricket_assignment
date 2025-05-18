@@ -13,4 +13,5 @@ mixin GameRoundsHandler{
   void moveToNextPlayerCardSelection();
   Player firstThrowPlayerForCurrentRound();
   bool isPlayerRemainingToThrowInCurrentRound();
+  int getCurrentRound();
 }

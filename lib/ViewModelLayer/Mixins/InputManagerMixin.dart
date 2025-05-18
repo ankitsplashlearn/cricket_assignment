@@ -12,4 +12,5 @@ mixin InputManagerMixin{
   Player getCurrentThrowingPlayer();
   Player getFirstThrowPlayerForCurrentRound();
   void moveToNextApplicableStep();
+  int getCurrentRound();
 }

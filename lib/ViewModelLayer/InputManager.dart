@@ -60,4 +60,9 @@ class InputManager with InputManagerMixin{
       _gameManager.applyCurrentPlayerThrow();
     }
   }
+
+  @override
+  int getCurrentRound() {
+    return _gameManager.getCurrentRound();
+  }
 }
