@@ -83,9 +83,9 @@ class GameManager with GameRoundsHandler{
   }
 
   Player getCurrentThrowingPlayer(){
-    _currentTurn = (_currentTurn + _currentTurnOffset) % _players.length;
-
-    return _players[_currentTurn];
+    _currentTurn = _currentTurn % _players.length;
+    int currentIndex = (_currentTurn + _currentTurnOffset) % _players.length;
+    return _players[currentIndex];
   }
 
   Player getFirstThrowPlayerForCurrentRound(){

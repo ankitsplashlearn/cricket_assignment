@@ -13,9 +13,11 @@ abstract class Player with PlayerCardAction, PlayerIdCounter {
   String name;
   PlayerHealth playerHealth;
   SpecialMode specialMode;
-  late List<GameCard> availableCards;
+  late List<GameCard> _availableCards;
   GameCard? selectedCard;
   CardAttribute? selectedCardAttribute;
+
+  List<GameCard> get availableCards => _availableCards;
 
   Player({
     required this.name,
@@ -23,11 +25,11 @@ abstract class Player with PlayerCardAction, PlayerIdCounter {
     required this.specialMode,
   }) {
     id = nextCount;
-    availableCards = [];
+    _availableCards = [];
   }
 
   void setCards(List<GameCard> gameCards){
-    availableCards = gameCards;
+    _availableCards = gameCards;
   }
 
   void setSelectedCardAttribute(CardAttribute cardAttribute){
