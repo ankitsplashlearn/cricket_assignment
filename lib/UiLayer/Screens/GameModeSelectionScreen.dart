@@ -37,6 +37,7 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(color: Colors.black),

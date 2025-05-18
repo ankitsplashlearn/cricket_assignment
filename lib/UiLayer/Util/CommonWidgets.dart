@@ -152,7 +152,7 @@ Widget gameCardWidget({
 Widget _keyValueRichText(String title, String value) {
   return RichText(
     text: TextSpan(
-      text: title,
+      text: "$title : ",
       children: [
         TextSpan(
           text: value,

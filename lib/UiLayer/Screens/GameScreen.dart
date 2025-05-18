@@ -45,6 +45,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(color: Colors.black),
         child:
@@ -73,10 +74,10 @@ class _GameScreenState extends State<GameScreen> {
           "Health: ",
           currentPlayer.playerHealth.health.toString(),
         ),
-        if(currentPlayer != firstThrowPlayer)
+        if (currentPlayer != firstThrowPlayer)
           _currentPlayerDetail(
-            "Attribute selected by ${firstThrowPlayer.name}: ${firstThrowPlayer.getSelectedCardAttribute().name}",
-            currentPlayer.playerHealth.health.toString(),
+            "Attribute selected by ${firstThrowPlayer.name} : ",
+            firstThrowPlayer.getSelectedCardAttribute().name,
           ),
         Expanded(
           child: _cardsForCurrentThrowingPlayer(
@@ -128,11 +129,15 @@ class _GameScreenState extends State<GameScreen> {
                   _gameScreenController.inputManager.moveToNextApplicableStep();
                   setState(() {});
                 },
-                attributeTapActive: true
+                attributeTapActive: true,
               ),
             )
             : SingleChildScrollView(
               child: Wrap(
+                spacing: 8,
+                alignment: WrapAlignment.start,
+                runSpacing: 8,
+                runAlignment: WrapAlignment.start,
                 children: gameCardWidgets(
                   gameCards: currentPlayer.availableCards,
                   cardTapCallback: (gameCard) {
