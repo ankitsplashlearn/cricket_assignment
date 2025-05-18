@@ -115,8 +115,11 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
                 },
                 icon: Icon(Icons.arrow_back, color: Colors.white, size: 40),
               ),
-              SizedBox(width: 16,),
-              Text("Setup game", style: TextStyleUtil.whiteTextStyle(fontSize: 28),)
+              SizedBox(width: 16),
+              Text(
+                "Setup game(Player 1 will have the first throw)",
+                style: TextStyleUtil.whiteTextStyle(fontSize: 28),
+              ),
             ],
           ),
           Container(height: 4, color: Colors.white),
@@ -165,25 +168,75 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
     );
   }
 
-  String _getSecondPlayerName(){
-    if(_gameModeSelectionScreenController.getGameModeEnum() == GameModeEnum.playerVsComputer){
+  String _getSecondPlayerName() {
+    if (_gameModeSelectionScreenController.getGameModeEnum() ==
+        GameModeEnum.playerVsComputer) {
       return "Computer";
-    }else{
+    } else {
       return "Player 2";
     }
   }
 
   void _openGameScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => GameScreen(
-              gameModeEnum:
-                  _gameModeSelectionScreenController.getGameModeEnum(),
+    List<String> inputErrors = [];
+
+    if (_player1Controller.text.isEmpty) {
+      inputErrors.add("Player 1 name is required.");
+    }
+
+    if (_player2Controller.text.isEmpty) {
+      inputErrors.add("Player 2 name is required.");
+    }
+
+    if (_selectedSpecialMode1 == null) {
+      inputErrors.add("Please select a special mode for Player 1.");
+    }
+
+    if (_selectedSpecialMode2 == null) {
+      inputErrors.add("Please select a special mode for Player 2.");
+    }
+
+    if (inputErrors.isEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:
+              (context) => GameScreen(
+                gameModeEnum:
+                    _gameModeSelectionScreenController.getGameModeEnum(),
+                // Add other required params like player names and special modes if needed
+              ),
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Please provide all fields"),
+            content: SizedBox(
+              width: double.maxFinite,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: inputErrors.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: const Icon(Icons.error, color: Colors.red),
+                    title: Text(inputErrors[index]),
+                  );
+                },
+              ),
             ),
-      ),
-    );
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   void _goToPhase(GameSetupPhaseEnum phase) {
