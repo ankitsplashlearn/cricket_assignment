@@ -117,20 +117,26 @@ Widget gameCardWidget({
 }) {
   List<Widget> cardAttributeWidgets = [];
 
+  cardAttributeWidgets.add(_keyValueRichText("Name", gameCard.name));
+
   for (var entry in gameCard.attributes.entries) {
     CardAttribute attribute = entry.value;
 
-    cardAttributeWidgets.add(
-      _buttonEnabledWidget(
-        child: _keyValueRichText(
-          attribute.name,
-          attribute.cardValue.toString(),
-        ),
+    Widget cardAttributeWidget = _keyValueRichText(
+      attribute.name,
+      attribute.cardValue.toString(),
+    );
+
+    if (attributeTapActive) {
+      cardAttributeWidget = _buttonEnabledWidget(
+        child: cardAttributeWidget,
         callback: () {
           attributeTapCallback(attribute);
         },
-      ),
-    );
+      );
+    }
+
+    cardAttributeWidgets.add(cardAttributeWidget);
   }
 
   return Container(

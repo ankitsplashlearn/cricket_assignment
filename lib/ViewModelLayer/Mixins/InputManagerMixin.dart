@@ -8,7 +8,6 @@ mixin InputManagerMixin{
   void enableSpecialModeForCurrentPlayer();
   void disableSpecialModeForCurrentPlayer();
   void applyCurrentPlayerThrow();
-  void updateData();
   Future<void> shuffleCards();
   Player getCurrentThrowingPlayer();
   Player getFirstThrowPlayerForCurrentRound();

@@ -96,6 +96,6 @@ class GameManager with GameRoundsHandler{
 
   @override
   bool isPlayerRemainingToThrowInCurrentRound() {
-    return _currentTurnOffset == _players.length - 1;
+    return _currentTurnOffset != _players.length - 1;
   }
 }

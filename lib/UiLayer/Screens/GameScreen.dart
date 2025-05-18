@@ -128,6 +128,7 @@ class _GameScreenState extends State<GameScreen> {
                   _gameScreenController.inputManager.moveToNextApplicableStep();
                   setState(() {});
                 },
+                attributeTapActive: true
               ),
             )
             : SingleChildScrollView(

@@ -37,11 +37,6 @@ class InputManager with InputManagerMixin{
   }
 
   @override
-  void updateData() {
-    _gameManager.evaluateRemainingPlayers();
-  }
-
-  @override
   Future<void> shuffleCards() async {
     _gameManager.shuffleCards();
   }
@@ -62,6 +57,7 @@ class InputManager with InputManagerMixin{
       _gameManager.moveToNextPlayerCardSelection();
     }else{
       _gameManager.evaluateRemainingPlayers();
+      _gameManager.applyCurrentPlayerThrow();
     }
   }
 }
