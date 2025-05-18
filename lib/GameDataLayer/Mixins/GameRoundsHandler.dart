@@ -9,4 +9,8 @@ mixin GameRoundsHandler{
   void disableSpecialModeForCurrentPlayer();
   void applyCurrentPlayerThrow();
   List<Player> evaluateRemainingPlayers();
+  Future<void> shuffleCards();
+  void moveToNextPlayerCardSelection();
+  Player firstThrowPlayerForCurrentRound();
+  bool isPlayerRemainingToThrowInCurrentRound();
 }

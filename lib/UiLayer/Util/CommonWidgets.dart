@@ -1,3 +1,5 @@
+import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/UiLayer/Util/TextStyleUtil.dart';
 import 'package:flutter/material.dart';
@@ -82,5 +84,88 @@ Widget buildPlayerForm(
         ),
       ],
     ),
+  );
+}
+
+List<Widget> gameCardWidgets({
+  required List<GameCard> gameCards,
+  required Function(GameCard) cardTapCallback,
+}) {
+  List<Widget> gameCardWidgets = [];
+
+  for (var gameCard in gameCards) {
+    gameCardWidgets.add(
+      _buttonEnabledWidget(
+        child: gameCardWidget(
+          gameCard: gameCard,
+          attributeTapCallback: (cardAttribute) {},
+        ),
+        callback: () {
+          cardTapCallback(gameCard);
+        },
+      ),
+    );
+  }
+
+  return gameCardWidgets;
+}
+
+Widget gameCardWidget({
+  required GameCard gameCard,
+  required Function(CardAttribute) attributeTapCallback,
+  bool attributeTapActive = false,
+}) {
+  List<Widget> cardAttributeWidgets = [];
+
+  for (var entry in gameCard.attributes.entries) {
+    CardAttribute attribute = entry.value;
+
+    cardAttributeWidgets.add(
+      _buttonEnabledWidget(
+        child: _keyValueRichText(
+          attribute.name,
+          attribute.cardValue.toString(),
+        ),
+        callback: () {
+          attributeTapCallback(attribute);
+        },
+      ),
+    );
+  }
+
+  return Container(
+    padding: EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      color: Colors.blueGrey,
+      border: Border.all(color: Colors.yellowAccent),
+    ),
+    child: Column(children: cardAttributeWidgets),
+  );
+}
+
+Widget _keyValueRichText(String title, String value) {
+  return RichText(
+    text: TextSpan(
+      text: title,
+      children: [
+        TextSpan(
+          text: value,
+          style: TextStyleUtil.yellowTextStyle(fontSize: 16, bold: true),
+        ),
+      ],
+      style: TextStyleUtil.whiteTextStyle(fontSize: 16),
+    ),
+  );
+}
+
+Widget _buttonEnabledWidget({
+  required Widget child,
+  required Function callback,
+}) {
+  return TextButton(
+    onPressed: () {
+      callback();
+    },
+    child: child,
   );
 }

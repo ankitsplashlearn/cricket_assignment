@@ -3,12 +3,7 @@ import 'package:cricket_card/UiLayer/Enums/GameModeEnum.dart';
 import 'package:cricket_card/ViewModelLayer/InputManager.dart';
 
 class GameScreenController{
-  final GameModeEnum gameModeEnum;
+  final InputManager inputManager;
 
-  late final InputManager inputManager;
-  late final GameManager gameManager;
-
-  GameScreenController({required this.gameModeEnum}){
-
-  }
+  GameScreenController({required this.inputManager}){}
 }

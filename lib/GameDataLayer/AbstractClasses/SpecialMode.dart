@@ -1,15 +1,32 @@
+import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+
 abstract class SpecialMode {
   final String modeName;
   final double damageToReceive;
   final double damageToApply;
 
-  bool isUsed = false;
-  bool isActiveNow = false;
+  bool _isUsed = false;
+  bool _isActiveNow = false;
 
   SpecialMode({required this.modeName, required this.damageToReceive, required this.damageToApply}) {}
 
-  //pass player here
-  bool canBeUsed();
+  bool canBeUsed(Player player){
+    return !_isUsed;
+  }
 
-  void activate();
+  bool get isActiveNow => _isActiveNow;
+
+  void activate(){
+    if(!_isUsed){
+      _isActiveNow = true;
+    }
+  }
+
+  void deActivate(){
+    _isActiveNow = false;
+  }
+
+  void setUsed(){
+    _isUsed = true;
+  }
 }

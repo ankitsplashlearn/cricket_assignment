@@ -1,4 +1,8 @@
+import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/BaseClasses/PlayerHealth.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/AiPlayer.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/HumanPlayer.dart';
 import 'package:cricket_card/GameDataLayer/DerivedClasses/SpecialMode/FreeHitMode.dart';
 import 'package:cricket_card/GameDataLayer/Util/SpecialModeUtil.dart';
 import 'package:cricket_card/UiLayer/Enums/GameModeEnum.dart';
@@ -169,11 +173,11 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
   }
 
   String _getSecondPlayerName() {
-    if (_gameModeSelectionScreenController.getGameModeEnum() ==
-        GameModeEnum.playerVsComputer) {
-      return "Computer";
-    } else {
-      return "Player 2";
+    switch (_gameModeSelectionScreenController.getGameModeEnum()) {
+      case GameModeEnum.playerVsComputer:
+        return "Computer";
+      case GameModeEnum.playerVsPlayer:
+        return "Player 2";
     }
   }
 
@@ -197,14 +201,15 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
     }
 
     if (inputErrors.isEmpty) {
+      List<Player> players = _getPlayersData();
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder:
               (context) => GameScreen(
-                gameModeEnum:
-                    _gameModeSelectionScreenController.getGameModeEnum(),
-                // Add other required params like player names and special modes if needed
+                inputManager: _gameModeSelectionScreenController
+                    .prepareInputManager(players),
               ),
         ),
       );
@@ -237,6 +242,38 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
         },
       );
     }
+  }
+
+  List<Player> _getPlayersData() {
+    List<Player> players = [];
+
+    Player player1 = HumanPlayer(
+      name: _player1Controller.text,
+      playerHealth: PlayerHealth(),
+      specialMode: _selectedSpecialMode1 ?? _availableModes.first
+    );
+
+    Player player2;
+
+    switch (_gameModeSelectionScreenController.getGameModeEnum()) {
+      case GameModeEnum.playerVsComputer:
+        player2 = AiPlayer(
+          name: _player2Controller.text,
+          playerHealth: PlayerHealth(),
+          specialMode: _selectedSpecialMode2 ?? _availableModes.first
+        );
+      case GameModeEnum.playerVsPlayer:
+        player2 = HumanPlayer(
+          name: _player1Controller.text,
+          playerHealth: PlayerHealth(),
+          specialMode: _selectedSpecialMode1 ?? _availableModes.first
+        );
+    }
+
+    players.add(player1);
+    players.add(player2);
+
+    return players;
   }
 
   void _goToPhase(GameSetupPhaseEnum phase) {

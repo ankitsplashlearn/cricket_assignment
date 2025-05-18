@@ -12,7 +12,7 @@ import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
 import 'package:flutter/services.dart';
 
 class DeckUtil {
-  static Future<List<CricketGameCard>> getDeckFromJson() async {
+  static Future<List<CricketGameCard>> getCricketCardsDeckFromJson() async {
     final String jsonString = await rootBundle.loadString(
       'assets/card_data/cricket_cards.json',
     );

@@ -2,16 +2,18 @@ class PlayerHealth {
   final int _maxHealth = 100;
   final int _minHealth = 0;
 
-  late int health;
+  late int _health;
+
+  int get health => _health;
 
   PlayerHealth() {
-    health = _maxHealth;
+    _health = _maxHealth;
   }
 
   void reduceHealth({required int reduceBy}) {
-    health -= reduceBy;
-    if (health < _minHealth) {
-      health = _minHealth;
+    _health -= reduceBy;
+    if (_health < _minHealth) {
+      _health = _minHealth;
     }
   }
 }

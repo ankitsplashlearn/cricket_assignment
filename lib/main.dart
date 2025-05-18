@@ -4,17 +4,11 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
-
-}
-
-Future<void> myCode() async {
-  var deck = await DeckUtil.getDeckFromJson();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
       ),
-      home: GameModeSelectionScreen()
+      home: GameModeSelectionScreen(),
     );
   }
 }
