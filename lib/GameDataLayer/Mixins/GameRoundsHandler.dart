@@ -1,5 +1,6 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 
 mixin GameRoundsHandler{
   void selectCardForCurrentPlayer(GameCard gameCard);
@@ -7,4 +8,5 @@ mixin GameRoundsHandler{
   void enableSpecialModeForCurrentPlayer();
   void disableSpecialModeForCurrentPlayer();
   void applyCurrentPlayerThrow();
+  List<Player> evaluateRemainingPlayers();
 }

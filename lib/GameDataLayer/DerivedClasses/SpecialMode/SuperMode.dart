@@ -1,7 +1,8 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 
-class SuperMode extends SpecialMode{
-  SuperMode():super(damageToReceive: 10, damageToApply: 25);
+class SuperMode extends SpecialMode {
+  SuperMode()
+    : super(modeName: "Super Mode", damageToReceive: 10, damageToApply: 25);
 
   @override
   void activate() {
@@ -13,5 +14,4 @@ class SuperMode extends SpecialMode{
     // TODO: implement canBeUsed
     throw UnimplementedError();
   }
-
 }

@@ -32,4 +32,9 @@ class InputManager with InputManagerMixin{
   void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute) {
     gameManager.selectCardAttributeForCurrentPlayer(cardAttribute);
   }
+
+  @override
+  void updateData() {
+    gameManager.evaluateRemainingPlayers();
+  }
 }

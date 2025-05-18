@@ -1,7 +1,8 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 
-class WorldCupMode extends SpecialMode{
-  WorldCupMode():super(damageToReceive: 10, damageToApply: 20);
+class WorldCupMode extends SpecialMode {
+  WorldCupMode()
+    : super(modeName: "World Cup Mode", damageToReceive: 10, damageToApply: 20);
 
   @override
   void activate() {
@@ -13,5 +14,4 @@ class WorldCupMode extends SpecialMode{
     // TODO: implement canBeUsed
     throw UnimplementedError();
   }
-
 }

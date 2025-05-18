@@ -1,9 +1,14 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 
-class PowerPlayMode extends SpecialMode{
+class PowerPlayMode extends SpecialMode {
   final double secondCardDamageToApply = 10;
 
-  PowerPlayMode():super(damageToReceive: 10, damageToApply: 20);
+  PowerPlayMode()
+    : super(
+        modeName: "Power Play Mode",
+        damageToReceive: 10,
+        damageToApply: 20,
+      );
 
   @override
   void activate() {
@@ -15,5 +20,4 @@ class PowerPlayMode extends SpecialMode{
     // TODO: implement canBeUsed
     throw UnimplementedError();
   }
-
 }

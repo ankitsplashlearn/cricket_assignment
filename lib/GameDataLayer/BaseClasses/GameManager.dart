@@ -32,4 +32,10 @@ class GameManager with GameRoundsHandler{
   void disableSpecialModeForCurrentPlayer() {
     // TODO: implement disableSpecialModeForCurrentPlayer
   }
+
+  @override
+  List<Player> evaluateRemainingPlayers() {
+    // TODO: implement anyPlayerWinning
+    throw UnimplementedError();
+  }
 }

@@ -1,0 +1,4 @@
+enum GameSetupPhaseEnum{
+  gameModeSelection,
+  playerDetailsForm;
+}
