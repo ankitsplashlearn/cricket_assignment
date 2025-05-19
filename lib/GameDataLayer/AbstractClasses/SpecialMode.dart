@@ -2,6 +2,7 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 
 abstract class SpecialMode {
   final String modeName;
+  // TODO: remove this  damageToReceive and  damageToApply and add applyMode Effect
   final double damageToReceive;
   final double damageToApply;
 
@@ -28,5 +29,6 @@ abstract class SpecialMode {
 
   void setUsed(){
     _isUsed = true;
+    _isActiveNow = false;
   }
 }

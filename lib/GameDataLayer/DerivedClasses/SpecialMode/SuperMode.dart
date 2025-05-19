@@ -3,13 +3,13 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 
 class SuperMode extends SpecialMode {
   SuperMode()
-    : super(modeName: "Super Mode", damageToReceive: 10, damageToApply: 25);
+      : super(modeName: "Super Mode", damageToReceive: 10, damageToApply: 25);
 
   @override
   bool canBeUsed(Player player) {
-    if(super.canBeUsed(player)){
+    if (super.canBeUsed(player)) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }

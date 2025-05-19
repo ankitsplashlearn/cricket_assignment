@@ -23,36 +23,45 @@ class DeckUtil {
     for (var jsonCard in jsonList) {
       final String name = jsonCard['name'];
       final List<CardAttribute> attributes = [];
-
+      final int id = jsonCard['id'] ?? 0;
       final List<dynamic> rawAttributes = jsonCard['attributes'];
+      
       for (var attr in rawAttributes) {
         final String type = attr['type'] ?? "Runs";
         final dynamic value = attr['value'] ?? "0";
-        final CardComparator cardComparator = CardComparator.fromInt(attr['comparator'] ?? 0);
-        final CardAttribute attribute = _createAttribute(type, value, cardComparator);
+        final CardComparator cardComparator =
+            CardComparator.fromInt(attr['comparator'] ?? 0);
+        final CardAttribute attribute =
+            _createAttribute(type, value, cardComparator);
         attributes.add(attribute);
       }
-
-      deck.add(CricketGameCard(name: name, attributes: attributes));
+      deck.add(CricketGameCard(id: id, name: name, attributes: attributes));
     }
 
     return deck;
   }
 
-  static CardAttribute _createAttribute(String type, dynamic value, CardComparator cardComparator) {
+  static CardAttribute _createAttribute(
+      String type, dynamic value, CardComparator cardComparator) {
     switch (type) {
       case "Runs":
-        return RunCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return RunCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       case "Matches":
-        return MatchCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return MatchCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       case "Centuries":
-        return CenturyCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return CenturyCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       case "Half Centuries":
-        return HalfCenturyCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return HalfCenturyCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       case "Catches":
-        return CatchCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return CatchCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       case "Wickets":
-        return WicketCardAttribute(name: type, cardValue: value, cardComparator: cardComparator);
+        return WicketCardAttribute(
+            cardValue: value, cardComparator: cardComparator);
       default:
         throw Exception("Unknown attribute type: $type");
     }

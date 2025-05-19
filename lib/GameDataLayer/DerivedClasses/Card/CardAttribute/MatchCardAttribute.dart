@@ -1,16 +1,25 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
-import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
+import 'package:cricket_card/helper/helper_functions.dart';
 
-class MatchCardAttribute extends CardAttribute{
+class MatchCardAttribute extends CardAttribute {
   @override
   int cardValue;
 
   @override
-  String name;
+  String get name => 'Matches';
 
   @override
-  CardComparator cardComparator;
+  final CardComparator cardComparator;
 
-  MatchCardAttribute({required this.name, required this.cardValue, required this.cardComparator});
+  @override
+  CardCompareResultType compare(CardAttribute other) {
+    return compareWith<int>(
+      other.cardValue,
+      (otherValue) => cardValue > otherValue,
+      (otherValue) => cardValue < otherValue,
+    );
+  }
+
+  MatchCardAttribute({required this.cardValue, required this.cardComparator});
 }

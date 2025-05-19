@@ -1,13 +1,11 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
-import 'package:cricket_card/GameDataLayer/Mixins/GameCardIdCounter.dart';
 
-abstract class GameCard with GameCardIdCounter {
-  late int id;
+abstract class GameCard {
+  final int id;
   final String name;
   late final Map<String, CardAttribute> attributes;
 
-  GameCard({required this.name, required List<CardAttribute> attributes}) {
-    id = nextCount;
+  GameCard({required this.id, required this.name, required List<CardAttribute> attributes}) {
     this.attributes = {};
     for (var attribute in attributes) {
       this.attributes.putIfAbsent(attribute.name, () => attribute);
