@@ -7,15 +7,20 @@ class FreeHitMode extends SpecialMode {
   String get modeName => "Free Hit Mode";
 
   @override
-  void applyModeEffect(
-      Player player, Player otherPlayer, CardThrowResult gameRoundResult) {
+  bool applyModeEffect(Player player, Player otherPlayer,
+      bool isHealthReducedForCurrentPlayer) {
+
+    var gameRoundResult = cardThrowResult(player, otherPlayer);
     switch (gameRoundResult) {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 12.5);
       case CardThrowResult.loss:
         player.playerHealth.reduceHealth(reduceBy: 15);
+        return true;
       default:
         break;
     }
+
+    return false;
   }
 }

@@ -1,4 +1,3 @@
-// TODO: abstract or not?
 abstract class Health {
   double get maxHealth;
 

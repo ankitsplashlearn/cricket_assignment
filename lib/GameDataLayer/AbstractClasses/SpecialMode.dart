@@ -30,6 +30,30 @@ abstract class SpecialMode {
     _isActiveNow = false;
   }
 
-  void applyModeEffect(
-      Player player, Player otherPlayer, CardThrowResult gameRoundResult);
+  CardThrowResult cardThrowResult(Player currentPlayer, Player otherPlayer) {
+    //Current player cards will be prioritized to win
+    CardThrowResult result = CardThrowResult.draw;
+
+    //returning draw if any of the list is empty
+    if(otherPlayer.selectedCardAttributes.isEmpty || currentPlayer.selectedCardAttributes.isEmpty){
+      return result;
+    }
+
+    //if any possibility exist to win then check
+    for (var attribute in currentPlayer.selectedCardAttributes) {
+      result = attribute.compareAttributes(otherPlayer.selectedCardAttributes.first);
+      if(result == CardThrowResult.win){
+        result = CardThrowResult.win;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  //returns true if the current lost and false current player wins
+  //this flag will be used further to check if the current players'
+  //health needs to be reduced or not
+  bool applyModeEffect(Player player, Player otherPlayer,
+      bool isHealthReducedForCurrentPlayer);
 }

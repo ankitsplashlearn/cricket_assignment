@@ -13,16 +13,21 @@ class WorldCupMode extends SpecialMode {
   }
 
   @override
-  void applyModeEffect(
-      Player player, Player otherPlayer, CardThrowResult gameRoundResult) {
+  bool applyModeEffect(Player player, Player otherPlayer,
+      bool isHealthReducedForCurrentPlayer) {
+
+    var gameRoundResult = cardThrowResult(player, otherPlayer);
     switch (gameRoundResult) {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 20);
       case CardThrowResult.loss:
         player.playerHealth.reduceHealth(reduceBy: 10);
+        return true;
       default:
         break;
     }
+
+    return false;
   }
 
   @override
