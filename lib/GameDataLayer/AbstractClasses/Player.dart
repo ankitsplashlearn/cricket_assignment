@@ -22,12 +22,16 @@ abstract class Player {
   CardAttribute? get selectedCardAttribute => _selectedCardAttribute;
   CardAttribute? _selectedCardAttribute;
 
+  List<CardAttribute> get selectedCardAttributes => _selectedCardAttributes;
+  final List<CardAttribute> _selectedCardAttributes = [];
+
   void setCards(List<GameCard> gameCards) {
     _availableCards = gameCards;
   }
 
   void setSelectedCardAttribute(CardAttribute cardAttribute) {
     _selectedCardAttribute = cardAttribute;
+    _selectedCardAttributes.add(cardAttribute);
   }
 
   void setSelectedCard(GameCard gameCard) {
