@@ -4,6 +4,8 @@ import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class PowerPlayMode extends SpecialMode {
   @override
+  int get attributesCountAllowedToSelect => 2;
+  @override
   bool applyModeEffect(Player player, Player otherPlayer,
       bool isHealthReducedForCurrentPlayer) {
 
@@ -12,7 +14,10 @@ class PowerPlayMode extends SpecialMode {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 25);
       case CardThrowResult.loss:
-        player.playerHealth.reduceHealth(reduceBy: 10);
+        if(!isHealthReducedForCurrentPlayer){
+          player.playerHealth.reduceHealth(reduceBy: 10);
+          isHealthReducedForCurrentPlayer = true;
+        }
         return true;
       default:
         break;

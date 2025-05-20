@@ -4,6 +4,8 @@ import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class FreeHitMode extends SpecialMode {
   @override
+  int get attributesCountAllowedToSelect => 1;
+  @override
   String get modeName => "Free Hit Mode";
 
   @override
@@ -15,7 +17,10 @@ class FreeHitMode extends SpecialMode {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 12.5);
       case CardThrowResult.loss:
-        player.playerHealth.reduceHealth(reduceBy: 15);
+        if(!isHealthReducedForCurrentPlayer){
+          player.playerHealth.reduceHealth(reduceBy: 15);
+          isHealthReducedForCurrentPlayer = true;
+        }
         return true;
       default:
         break;

@@ -3,6 +3,7 @@ import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 abstract class SpecialMode {
   String get modeName;
+  int get attributesCountAllowedToSelect;
 
   bool _isUsed = false;
   bool _isActiveNow = false;

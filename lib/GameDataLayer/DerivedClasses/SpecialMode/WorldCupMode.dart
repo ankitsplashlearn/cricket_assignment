@@ -4,6 +4,8 @@ import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class WorldCupMode extends SpecialMode {
   @override
+  int get attributesCountAllowedToSelect => 1;
+  @override
   bool canBeUsed(Player player) {
     if (super.canBeUsed(player)) {
       return player.availableCards.length == 1;
@@ -21,7 +23,10 @@ class WorldCupMode extends SpecialMode {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 20);
       case CardThrowResult.loss:
-        player.playerHealth.reduceHealth(reduceBy: 10);
+        if(!isHealthReducedForCurrentPlayer){
+          player.playerHealth.reduceHealth(reduceBy: 10);
+          isHealthReducedForCurrentPlayer = true;
+        }
         return true;
       default:
         break;

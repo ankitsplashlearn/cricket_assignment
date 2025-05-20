@@ -5,6 +5,8 @@ import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 //This mode will be used for non-special mode throws
 class DefaultMode extends SpecialMode {
   @override
+  int get attributesCountAllowedToSelect => 1;
+  @override
   String get modeName => "Default Mode";
 
   @override
@@ -16,7 +18,10 @@ class DefaultMode extends SpecialMode {
       case CardThrowResult.win:
         otherPlayer.playerHealth.reduceHealth(reduceBy: 10);
       case CardThrowResult.loss:
-        player.playerHealth.reduceHealth(reduceBy: 10);
+        if(!isHealthReducedForCurrentPlayer){
+          player.playerHealth.reduceHealth(reduceBy: 10);
+          isHealthReducedForCurrentPlayer = true;
+        }
         return true;
       default:
         break;

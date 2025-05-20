@@ -25,6 +25,10 @@ abstract class Player {
   List<CardAttribute> get selectedCardAttributes => _selectedCardAttributes;
   final List<CardAttribute> _selectedCardAttributes = [];
 
+  void removePlayedCards(){
+    _availableCards.removeWhere((card){return _selectedCard == card;});
+  }
+
   void setCards(List<GameCard> gameCards) {
     _availableCards = gameCards;
   }
