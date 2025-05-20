@@ -16,28 +16,4 @@ mixin GameRoundsHandler {
   Player firstThrowPlayerForCurrentRound();
   bool isPlayerRemainingToThrowInCurrentRound();
   int getCurrentRound();
-
-  CardThrowResult gameRoundResult(CardCompareResultType cardCompareResultType,
-      CardComparator cardComparator) {
-    switch (cardComparator) {
-      case CardComparator.greater:
-        switch (cardCompareResultType) {
-          case CardCompareResultType.greaterThan:
-            return CardThrowResult.win;
-          case CardCompareResultType.equalTo:
-            return CardThrowResult.draw;
-          case CardCompareResultType.lessThan:
-            return CardThrowResult.loss;
-        }
-      case CardComparator.lesser:
-        switch (cardCompareResultType) {
-          case CardCompareResultType.greaterThan:
-            return CardThrowResult.loss;
-          case CardCompareResultType.equalTo:
-            return CardThrowResult.draw;
-          case CardCompareResultType.lessThan:
-            return CardThrowResult.win;
-        }
-    }
-  }
 }

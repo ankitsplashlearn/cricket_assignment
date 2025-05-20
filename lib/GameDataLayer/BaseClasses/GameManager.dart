@@ -1,6 +1,8 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/SpecialMode/DefaultMode.dart';
 import 'package:cricket_card/GameDataLayer/Mixins/GameRoundsHandler.dart';
 import 'package:cricket_card/GameDataLayer/Util/DeckUtil.dart';
 
@@ -22,8 +24,19 @@ class GameManager with GameRoundsHandler {
 
   @override
   void applyCurrentPlayerThrow() {
-    // TODO: implement applyCurrentPlayerThrow
-    // apply damage to all the players after this throw
+    bool isHealthReducedForCurrentPlayer = false;
+    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    bool isSpecialModeActive =
+        currentThrowingPlayer.specialModes.first.isActiveNow;
+    SpecialMode activeSpecialMode = isSpecialModeActive
+        ? currentThrowingPlayer.specialModes.first
+        : DefaultMode();
+    for (var player in _players) {
+      if (player != currentThrowingPlayer) {
+        activeSpecialMode.applyModeEffect(
+            currentThrowingPlayer, player, isHealthReducedForCurrentPlayer);
+      }
+    }
 
     _currentTurnOffset = 0;
     _currentGameRound++;
