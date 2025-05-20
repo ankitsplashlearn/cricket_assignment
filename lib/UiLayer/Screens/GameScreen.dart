@@ -75,7 +75,7 @@ class _GameScreenState extends State<GameScreen> {
         ),
         if(currentPlayer != firstThrowPlayer)
           _currentPlayerDetail(
-            "Attribute selected by ${firstThrowPlayer.name}: ${firstThrowPlayer.getSelectedCardAttribute().name}",
+            "Attribute selected by ${firstThrowPlayer.name}: ${firstThrowPlayer.selectedCardAttribute?.name}",
             currentPlayer.playerHealth.health.toString(),
           ),
         Expanded(
@@ -119,7 +119,7 @@ class _GameScreenState extends State<GameScreen> {
                 gameCard:
                     _gameScreenController.inputManager
                         .getCurrentThrowingPlayer()
-                        .getSelectedCard(),
+                        .selectedCard,
                 attributeTapCallback: (cardAttribute) {
                   _gameScreenController.inputManager
                       .selectCardAttributeForCurrentPlayer(cardAttribute);
