@@ -1,7 +1,6 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/UiLayer/ScreenControllers/GameScreenController.dart';
 import 'package:cricket_card/UiLayer/Util/CommonWidgets.dart';
-import 'package:cricket_card/UiLayer/Util/TextStyleUtil.dart';
 import 'package:cricket_card/ViewModelLayer/InputManager.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +79,7 @@ class _GameScreenState extends State<GameScreen> {
         if (currentPlayer != firstThrowPlayer)
           keyValueRichText(
             "Attribute selected by ${firstThrowPlayer.name}",
-            firstThrowPlayer.getSelectedCardAttribute().name,
+            firstThrowPlayer.selectedCardAttribute?.name ?? "",
           ),
         Expanded(
           child: _cardsForCurrentThrowingPlayer(
