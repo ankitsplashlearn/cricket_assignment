@@ -2,9 +2,8 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/BaseClasses/PlayerHealth.dart';
-import 'package:cricket_card/GameDataLayer/Mixins/PlayerCardAction.dart';
 
-abstract class Player with PlayerCardAction {
+abstract class Player {
   int get id;
   String get name;
   Health get playerHealth;
@@ -23,12 +22,16 @@ abstract class Player with PlayerCardAction {
   CardAttribute? get selectedCardAttribute => _selectedCardAttribute;
   CardAttribute? _selectedCardAttribute;
 
+  List<CardAttribute> get selectedCardAttributes => _selectedCardAttributes;
+  final List<CardAttribute> _selectedCardAttributes = [];
+
   void setCards(List<GameCard> gameCards) {
     _availableCards = gameCards;
   }
 
   void setSelectedCardAttribute(CardAttribute cardAttribute) {
     _selectedCardAttribute = cardAttribute;
+    _selectedCardAttributes.add(cardAttribute);
   }
 
   void setSelectedCard(GameCard gameCard) {

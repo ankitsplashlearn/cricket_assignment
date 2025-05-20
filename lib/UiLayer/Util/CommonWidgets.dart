@@ -111,12 +111,15 @@ List<Widget> gameCardWidgets({
 }
 
 Widget gameCardWidget({
-  required GameCard gameCard,
+  required GameCard? gameCard,
   required Function(CardAttribute) attributeTapCallback,
   bool attributeTapActive = false,
 }) {
   List<Widget> cardAttributeWidgets = [];
 
+  if(gameCard == null){
+    return Container();
+  }
   for (var entry in gameCard.attributes.entries) {
     CardAttribute attribute = entry.value;
 
