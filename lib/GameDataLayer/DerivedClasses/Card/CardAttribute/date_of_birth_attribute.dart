@@ -2,24 +2,24 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
 import 'package:cricket_card/helper/helper_functions.dart';
 
-class CatchCardAttribute extends CardAttribute {
+class DateOfBirthAttribute extends CardAttribute {
   @override
-  String get name => 'Catches';
+  String get name => 'DOB';
 
   @override
-  final int cardValue;
+  DateTime cardValue;
 
-  CatchCardAttribute({required this.cardValue, required this.cardComparator});
+  DateOfBirthAttribute({required this.cardValue, required this.cardComparator});
 
   @override
   final CardComparator cardComparator;
 
   @override
   CardCompareResultType compare(CardAttribute other) {
-    return compareWith<int>(
+    return compareWith<DateTime>(
       other.cardValue,
-      (otherValue) => cardValue > otherValue,
-      (otherValue) => cardValue < otherValue,
+      (otherValue) => cardValue.isAfter(otherValue),
+      (otherValue) => cardValue.isBefore(otherValue),
     );
   }
 }

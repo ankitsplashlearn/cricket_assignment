@@ -1,20 +1,21 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class FreeHitMode extends SpecialMode {
-  FreeHitMode()
-    : super(
-        modeName: "Free Hit Mode",
-        damageToReceive: 12.5,
-        damageToApply: 12,
-      );
+  @override
+  String get modeName => "Free Hit Mode";
 
   @override
-  bool canBeUsed(Player player) {
-    if(super.canBeUsed(player)){
-      return true;
-    }else{
-      return false;
+  void applyModeEffect(
+      Player player, Player otherPlayer, CardThrowResult gameRoundResult) {
+    switch (gameRoundResult) {
+      case CardThrowResult.win:
+        otherPlayer.playerHealth.reduceHealth(reduceBy: 12.5);
+      case CardThrowResult.loss:
+        player.playerHealth.reduceHealth(reduceBy: 15);
+      default:
+        break;
     }
   }
 }

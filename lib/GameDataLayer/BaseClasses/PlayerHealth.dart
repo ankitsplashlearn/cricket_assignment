@@ -1,19 +1,21 @@
-class PlayerHealth {
-  final int _maxHealth = 100;
-  final int _minHealth = 0;
+// TODO: abstract or not?
+abstract class Health {
+  double get maxHealth;
 
-  late int _health;
+  late double _health;
 
-  int get health => _health;
+  double get health => _health;
 
-  PlayerHealth() {
-    _health = _maxHealth;
+  Health() {
+    _health = maxHealth;
   }
 
-  void reduceHealth({required int reduceBy}) {
+  void reduceHealth({required double reduceBy}) {
     _health -= reduceBy;
-    if (_health < _minHealth) {
-      _health = _minHealth;
-    }
   }
+}
+
+class PlayerHealth extends Health {
+  @override
+  double get maxHealth => 100;
 }

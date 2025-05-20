@@ -1,22 +1,21 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 class PowerPlayMode extends SpecialMode {
-  final double secondCardDamageToApply = 10;
-
-  PowerPlayMode()
-    : super(
-        modeName: "Power Play Mode",
-        damageToReceive: 10,
-        damageToApply: 20,
-      );
-
   @override
-  bool canBeUsed(Player player) {
-    if(super.canBeUsed(player)){
-      return true;
-    }else{
-      return false;
+  void applyModeEffect(
+      Player player, Player otherPlayer, CardThrowResult gameRoundResult) {
+    switch (gameRoundResult) {
+      case CardThrowResult.win:
+        otherPlayer.playerHealth.reduceHealth(reduceBy: 25);
+      case CardThrowResult.loss:
+        player.playerHealth.reduceHealth(reduceBy: 10);
+      default:
+        break;
     }
   }
+
+  @override
+  String get modeName => "Power Play Mode";
 }

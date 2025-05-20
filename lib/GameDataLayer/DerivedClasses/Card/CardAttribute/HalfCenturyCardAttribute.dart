@@ -1,16 +1,26 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
-import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
+import 'package:cricket_card/helper/helper_functions.dart';
 
-class HalfCenturyCardAttribute extends CardAttribute{
+class HalfCenturyCardAttribute extends CardAttribute {
   @override
   int cardValue;
 
   @override
-  String name;
+  String get name => '50s';
 
   @override
-  CardComparator cardComparator;
+  final CardComparator cardComparator;
 
-  HalfCenturyCardAttribute({required this.name, required this.cardValue, required this.cardComparator});
+  @override
+  CardCompareResultType compare(CardAttribute other) {
+    return compareWith<int>(
+      other.cardValue,
+      (otherValue) => cardValue > otherValue,
+      (otherValue) => cardValue < otherValue,
+    );
+  }
+
+  HalfCenturyCardAttribute(
+      {required this.cardValue, required this.cardComparator});
 }

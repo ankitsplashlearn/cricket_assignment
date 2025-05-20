@@ -105,7 +105,7 @@ class _GameScreenState extends State<GameScreen> {
                 gameCard:
                     _gameScreenController.inputManager
                         .getCurrentThrowingPlayer()
-                        .getSelectedCard(),
+                        .selectedCard,
                 attributeTapCallback: (cardAttribute) {
                   _gameScreenController.inputManager
                       .selectCardAttributeForCurrentPlayer(cardAttribute);

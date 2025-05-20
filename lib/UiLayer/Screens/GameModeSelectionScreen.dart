@@ -251,7 +251,7 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
     Player player1 = HumanPlayer(
       name: _player1Controller.text,
       playerHealth: PlayerHealth(),
-      specialMode: _selectedSpecialMode1 ?? _availableModes.first
+      specialModes: [_selectedSpecialMode1 ?? _availableModes.first], id: 1
     );
 
     Player player2;
@@ -261,13 +261,13 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
         player2 = AiPlayer(
           name: _player2Controller.text,
           playerHealth: PlayerHealth(),
-          specialMode: _selectedSpecialMode2 ?? _availableModes.first
+          specialModes: [_selectedSpecialMode2 ?? _availableModes.first], id: 2
         );
       case GameModeEnum.playerVsPlayer:
         player2 = HumanPlayer(
           name: _player1Controller.text,
           playerHealth: PlayerHealth(),
-          specialMode: _selectedSpecialMode1 ?? _availableModes.first
+          specialModes: [_selectedSpecialMode1 ?? _availableModes.first], id:2
         );
     }
 

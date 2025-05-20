@@ -1,32 +1,35 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 abstract class SpecialMode {
-  final String modeName;
-  final double damageToReceive;
-  final double damageToApply;
+  String get modeName;
 
   bool _isUsed = false;
   bool _isActiveNow = false;
 
-  SpecialMode({required this.modeName, required this.damageToReceive, required this.damageToApply}) {}
+  int get cardAttributedAvailableToSelect => 1;
 
-  bool canBeUsed(Player player){
+  bool canBeUsed(Player player) {
     return !_isUsed;
   }
 
   bool get isActiveNow => _isActiveNow;
 
-  void activate(){
-    if(!_isUsed){
+  void activate() {
+    if (!_isUsed) {
       _isActiveNow = true;
     }
   }
 
-  void deActivate(){
+  void deActivate() {
     _isActiveNow = false;
   }
 
-  void setUsed(){
+  void setUsed() {
     _isUsed = true;
+    _isActiveNow = false;
   }
+
+  void applyModeEffect(
+      Player player, Player otherPlayer, CardThrowResult gameRoundResult);
 }

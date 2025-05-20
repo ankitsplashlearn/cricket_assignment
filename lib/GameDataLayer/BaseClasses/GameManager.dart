@@ -4,20 +4,20 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/Mixins/GameRoundsHandler.dart';
 import 'package:cricket_card/GameDataLayer/Util/DeckUtil.dart';
 
-class GameManager with GameRoundsHandler{
+class GameManager with GameRoundsHandler {
   late List<Player> _players;
   List<GameCard> _cardsAvailableInTheGame = [];
-  int _currentTurn = 0;
-  int _currentTurnOffset = 0;
+  int _currentTurn = 0; // Who selects the card first
+  int _currentTurnOffset = 0; // Who is selecting the card
   int _currentGameRound = 0;
 
-  GameManager({required List<Player> players}){
+  GameManager({required List<Player> players}) {
     _players = players;
   }
 
   @override
   void enableSpecialModeForCurrentPlayer() {
-    getCurrentThrowingPlayer().specialMode.activate();
+    getCurrentThrowingPlayer().specialModes.first.activate();
   }
 
   @override
@@ -42,7 +42,7 @@ class GameManager with GameRoundsHandler{
 
   @override
   void disableSpecialModeForCurrentPlayer() {
-    getCurrentThrowingPlayer().specialMode.deActivate();
+    getCurrentThrowingPlayer().specialModes.first.deActivate();
   }
 
   @override
@@ -57,7 +57,7 @@ class GameManager with GameRoundsHandler{
 
     int cardsCount = _cardsAvailableInTheGame.length;
     int playersCount = _players.length;
-    if(playersCount == 0) return;
+    if (playersCount == 0) return;
     int cardsPerPlayer = cardsCount ~/ playersCount;
 
     _cardsAvailableInTheGame.shuffle();
@@ -74,7 +74,7 @@ class GameManager with GameRoundsHandler{
 
   @override
   void moveToNextPlayerCardSelection() {
-    _currentTurnOffset = (_currentTurnOffset + 1)%(_players.length);
+    _currentTurnOffset = (_currentTurnOffset + 1) % (_players.length);
   }
 
   @override
@@ -82,13 +82,13 @@ class GameManager with GameRoundsHandler{
     return getFirstThrowPlayerForCurrentRound();
   }
 
-  Player getCurrentThrowingPlayer(){
+  Player getCurrentThrowingPlayer() {
     _currentTurn = _currentTurn % _players.length;
     int currentIndex = (_currentTurn + _currentTurnOffset) % _players.length;
     return _players[currentIndex];
   }
 
-  Player getFirstThrowPlayerForCurrentRound(){
+  Player getFirstThrowPlayerForCurrentRound() {
     _currentTurn = _currentTurn % _players.length;
 
     return _players[_currentTurn];

@@ -2,21 +2,21 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
 import 'package:cricket_card/helper/helper_functions.dart';
 
-class CatchCardAttribute extends CardAttribute {
+class BolwingRateProperty extends CardAttribute {
   @override
-  String get name => 'Catches';
+  String get name => 'BowlingRate';
 
   @override
-  final int cardValue;
+  final double cardValue;
 
-  CatchCardAttribute({required this.cardValue, required this.cardComparator});
+  BolwingRateProperty({required this.cardValue, required this.cardComparator});
 
   @override
   final CardComparator cardComparator;
 
   @override
   CardCompareResultType compare(CardAttribute other) {
-    return compareWith<int>(
+    return compareWith<double>(
       other.cardValue,
       (otherValue) => cardValue > otherValue,
       (otherValue) => cardValue < otherValue,
