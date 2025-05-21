@@ -12,6 +12,20 @@ class GameOverScreen extends StatefulWidget {
 }
 
 class _GameOverScreenState extends State<GameOverScreen> {
+
+  String winner = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    if(widget.winningPlayer != null){
+      winner = "${widget.winningPlayer!.name} won!";
+    }else{
+      winner = "Draw!";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +34,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
         child: Column(
           children: [
             Text("Game Over", style: TextStyleUtil.whiteTextStyle(fontSize: 32),),
-            Text("${widget.winningPlayer?.name ?? "NA"} won!", style: TextStyleUtil.yellowTextStyle(fontSize: 48)),
+            Text(winner, style: TextStyleUtil.yellowTextStyle(fontSize: 48)),
             TextButton(
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
