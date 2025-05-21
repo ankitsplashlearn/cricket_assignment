@@ -4,7 +4,7 @@ import 'package:cricket_card/helper/helper_functions.dart';
 
 class DateOfBirthAttribute extends CardAttribute {
   @override
-  String get name => 'DOB';
+  String get name => 'Date of Birth';
 
   @override
   DateTime cardValue;

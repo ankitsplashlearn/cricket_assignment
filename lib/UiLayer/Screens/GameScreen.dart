@@ -3,6 +3,7 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/AiPlayer.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/SpecialMode/DefaultMode.dart';
 import 'package:cricket_card/UiLayer/ScreenControllers/GameScreenController.dart';
 import 'package:cricket_card/UiLayer/Screens/GameOverScreen.dart';
 import 'package:cricket_card/UiLayer/Util/CommonWidgets.dart';
@@ -86,7 +87,7 @@ class _GameScreenState extends State<GameScreen> {
             "Attributes selected by ${firstThrowPlayer.name}",
             firstThrowPlayer.selectedCardAttributes
                     .map((e) {
-                      e.name;
+                      return e.name;
                     })
                     .toList()
                     .toString() ??
@@ -158,8 +159,6 @@ class _GameScreenState extends State<GameScreen> {
     Player firstThrowPlayer,
   ) {
     bool cardSelected = false;
-    int countCardAttributesAllowedToSelect =
-        currentPlayer.getCountCardAttributesAllowedToSelect();
     return StatefulBuilder(
       builder: (context, localSetState) {
         if (currentPlayer is AiPlayer && !cardSelected) {
@@ -167,14 +166,13 @@ class _GameScreenState extends State<GameScreen> {
               .choseCardsAndAttributes(currentPlayer == firstThrowPlayer)
               .then((_) {
             if (!mounted) return;
-            localSetState(() {
-              _moveToNextTurnOrRound();
-            });
+            _moveToNextTurnOrRound();
           });
         }
-        Player _currentThrowingPlayer = _gameScreenController.inputManager
-            .getCurrentThrowingPlayer();
-        List<CardAttribute> selectedCardAttributes = _currentThrowingPlayer.selectedCardAttributes;
+        Player _currentThrowingPlayer =
+            _gameScreenController.inputManager.getCurrentThrowingPlayer();
+        List<CardAttribute> selectedCardAttributes =
+            _currentThrowingPlayer.selectedCardAttributes;
         return cardSelected
             ? Center(
                 child: gameCardWidget(
@@ -185,13 +183,11 @@ class _GameScreenState extends State<GameScreen> {
                       return;
                     }
                     //reducing current counts
-                    countCardAttributesAllowedToSelect--;
-                    if(countCardAttributesAllowedToSelect > 0){
-                      localSetState((){});
-                    }else{
-                      _gameScreenController.inputManager
+                    _gameScreenController.inputManager
                           .selectCardAttributeForCurrentPlayer(cardAttribute);
-
+                    if (_currentThrowingPlayer.getCountCardAttributesAllowedToSelect() > 0) {
+                      localSetState(() {});
+                    } else {
                       _moveToNextTurnOrRound();
                     }
                   },

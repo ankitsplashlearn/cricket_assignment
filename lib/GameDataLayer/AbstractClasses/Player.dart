@@ -26,7 +26,9 @@ abstract class Player {
   final List<CardAttribute> _selectedCardAttributes = [];
 
   void removePlayedCards(){
+    //removing played cards and clearing selected card attributes
     _availableCards.removeWhere((card){return _selectedCard == card;});
+    _selectedCardAttributes.clear();
   }
 
   void setCards(List<GameCard> gameCards) {
@@ -35,10 +37,13 @@ abstract class Player {
 
   void addToSelectedCardAttribute(CardAttribute cardAttribute) {
     _selectedCardAttributes.add(cardAttribute);
+    print(
+        "$name selected attribute ${cardAttribute.toString()}");
   }
 
   void setSelectedCard(GameCard gameCard) {
     _selectedCard = gameCard;
+    print("$name selected card ${gameCard.toString()}");
   }
 
   void removeSpecialModesUsed(){
@@ -58,7 +63,7 @@ abstract class Player {
       }
     }
 
-    return result;
+    return max(result - _selectedCardAttributes.length, 0);
   }
 
   @override

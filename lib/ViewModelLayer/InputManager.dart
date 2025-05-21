@@ -15,7 +15,7 @@ class InputManager with InputManagerMixin{
 
   @override
   void applyCurrentPlayerThrow() {
-    _gameManager.applyCurrentPlayerThrow();
+    _gameManager.applyCurrentRoundFirstPlayerThrow();
   }
 
   @override
@@ -58,7 +58,7 @@ class InputManager with InputManagerMixin{
     if(_gameManager.isPlayerRemainingToThrowInCurrentRound()){
       _gameManager.moveToNextPlayerCardSelection();
     }else{
-      _gameManager.applyCurrentPlayerThrow();
+      _gameManager.applyCurrentRoundFirstPlayerThrow();
       List<Player> players = _gameManager.evaluateRemainingPlayers();
       if(players.length == 1 || players.isEmpty){
         _isGameOver = true;

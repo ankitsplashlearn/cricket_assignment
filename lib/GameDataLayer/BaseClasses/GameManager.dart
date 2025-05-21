@@ -26,10 +26,10 @@ class GameManager with GameRoundsHandler {
   }
 
   @override
-  void applyCurrentPlayerThrow() {
+  void applyCurrentRoundFirstPlayerThrow() {
     print("Card throw evaluation for round ${_currentGameRound}");
     bool isHealthReducedForCurrentPlayer = false;
-    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    Player currentThrowingPlayer = getFirstThrowPlayerForCurrentRound();
     bool isSpecialModeActive =
         currentThrowingPlayer.specialModes.first.isActiveNow;
     SpecialMode activeSpecialMode = isSpecialModeActive
@@ -41,16 +41,15 @@ class GameManager with GameRoundsHandler {
             currentThrowingPlayer, player, isHealthReducedForCurrentPlayer);
         player.removePlayedCards();
         player.removeSpecialModesUsed();
+        print("${player.name}`s health: ${player.playerHealth.health}");
       }
-
-      print("$player`s health: ${player.playerHealth.health}");
     }
 
     currentThrowingPlayer.removePlayedCards();
     currentThrowingPlayer.removeSpecialModesUsed();
 
     print(
-        "$currentThrowingPlayer`s health: ${currentThrowingPlayer.playerHealth.health}");
+        "${currentThrowingPlayer.name}`s health: ${currentThrowingPlayer.playerHealth.health}");
 
     _currentTurnOffset = 0;
     _currentGameRound++;
@@ -61,15 +60,12 @@ class GameManager with GameRoundsHandler {
   void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute) {
     Player currentThrowingPlayer = getCurrentThrowingPlayer();
     currentThrowingPlayer.addToSelectedCardAttribute(cardAttribute);
-    print(
-        "${currentThrowingPlayer.name} selected attribute ${cardAttribute.toString()}");
   }
 
   @override
   void selectCardForCurrentPlayer(GameCard gameCard) {
     Player currentThrowingPlayer = getCurrentThrowingPlayer();
     currentThrowingPlayer.setSelectedCard(gameCard);
-    print("${currentThrowingPlayer.name} selected card ${gameCard.toString()}");
   }
 
   @override
@@ -120,12 +116,14 @@ class GameManager with GameRoundsHandler {
     return getFirstThrowPlayerForCurrentRound();
   }
 
+  //player who selects the card now
   Player getCurrentThrowingPlayer() {
     _currentTurn = _currentTurn % _players.length;
     int currentIndex = (_currentTurn + _currentTurnOffset) % _players.length;
     return _players[currentIndex];
   }
 
+  //from whom to compare
   Player getFirstThrowPlayerForCurrentRound() {
     _currentTurn = _currentTurn % _players.length;
 

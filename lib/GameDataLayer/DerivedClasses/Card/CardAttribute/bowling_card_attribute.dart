@@ -4,7 +4,7 @@ import 'package:cricket_card/helper/helper_functions.dart';
 
 class BolwingRateProperty extends CardAttribute {
   @override
-  String get name => 'BowlingRate';
+  String get name => 'Bowling Rate';
 
   @override
   final double cardValue;

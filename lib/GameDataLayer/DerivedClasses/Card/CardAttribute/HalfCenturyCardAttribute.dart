@@ -7,7 +7,7 @@ class HalfCenturyCardAttribute extends CardAttribute {
   int cardValue;
 
   @override
-  String get name => '50s';
+  String get name => 'Half Centuries';
 
   @override
   final CardComparator cardComparator;

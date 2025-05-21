@@ -33,26 +33,30 @@ abstract class SpecialMode {
     // Default to draw
     CardThrowResult result = CardThrowResult.draw;
 
-    // Return draw if any attribute list is empty
-    if (currentPlayer.selectedCardAttributes.isEmpty || otherPlayer.selectedCardAttributes.isEmpty) {
+    // Return draw if lists are empty or card is not selected
+    if (currentPlayer.selectedCardAttributes.isEmpty || otherPlayer.selectedCard == null) {
       return result;
     }
 
-    // Compare each attribute of current player with each of other player's attributes
+    final otherCardAttributes = otherPlayer.selectedCard!.attributes;
+
     for (var myAttr in currentPlayer.selectedCardAttributes) {
-      for (var otherAttr in otherPlayer.selectedCardAttributes) {
-        CardThrowResult compareResult = myAttr.compareAttributes(otherAttr);
+      // Match attribute by name in the other player's selected card
+      final opponentAttr = otherCardAttributes[myAttr.name];
+
+      if (opponentAttr != null) {
+        final compareResult = myAttr.compareAttributes(opponentAttr);
+
         if (compareResult == CardThrowResult.win) {
-          return CardThrowResult.win;
+          return CardThrowResult.win; // immediate win
         } else if (compareResult == CardThrowResult.loss) {
-          result = CardThrowResult.loss;
+          result = CardThrowResult.loss; // possible loss, continue checking
         }
       }
     }
 
     return result;
   }
-
 
   //returns true if the current lost and false current player wins
   //this flag will be used further to check if the current players'

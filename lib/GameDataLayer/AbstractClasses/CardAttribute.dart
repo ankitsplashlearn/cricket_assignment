@@ -9,17 +9,18 @@ abstract class CardAttribute {
 
   CardThrowResult compareAttributes(CardAttribute other){
     CardThrowResult result = CardThrowResult.draw;
+    CardCompareResultType cardCompareResultType = compare(other);
     switch(cardComparator){
       case CardComparator.greater:
-        if(cardValue > other.cardValue){
+        if(cardCompareResultType == CardCompareResultType.greaterThan){
           result = CardThrowResult.win;
-        }else if(other.cardValue > cardValue){
+        }else if(cardCompareResultType == CardCompareResultType.lessThan){
           result = CardThrowResult.loss;
         }
       case CardComparator.lesser:
-        if(cardValue < other.cardValue){
+        if(cardCompareResultType == CardCompareResultType.lessThan){
           result = CardThrowResult.win;
-        }else if(other.cardValue < cardValue){
+        }else if(cardCompareResultType == CardCompareResultType.greaterThan){
           result = CardThrowResult.loss;
         }
     }

@@ -7,7 +7,7 @@ mixin GameRoundsHandler {
   void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute);
   void enableSpecialModeForCurrentPlayer();
   void disableSpecialModeForCurrentPlayer();
-  void applyCurrentPlayerThrow();
+  void applyCurrentRoundFirstPlayerThrow();
   List<Player> evaluateRemainingPlayers();
   Future<void> shuffleCards();
   void moveToNextPlayerCardSelection();
