@@ -264,9 +264,9 @@ class _GameModeSelectionScreenState extends State<GameModeSelectionScreen> {
         );
       case GameModeEnum.playerVsPlayer:
         player2 = HumanPlayer(
-          name: _player1Controller.text,
+          name: _player2Controller.text,
           playerHealth: PlayerHealth(),
-          specialModes: [_selectedSpecialMode1 ?? _availableModes.first], id:2
+          specialModes: [_selectedSpecialMode2 ?? _availableModes.first], id:2
         );
     }
 
