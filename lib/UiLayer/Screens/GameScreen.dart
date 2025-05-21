@@ -137,7 +137,7 @@ class _GameScreenState extends State<GameScreen> {
             isActive = !isActive;
             if (isActive) {
               _gameScreenController
-                  .inputManager.enableSpecialModeForCurrentPlayer;
+                  .inputManager.enableSpecialModeForCurrentPlayer();
             } else {
               _gameScreenController.inputManager
                   .disableSpecialModeForCurrentPlayer();
