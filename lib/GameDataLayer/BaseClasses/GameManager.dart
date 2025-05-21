@@ -36,10 +36,12 @@ class GameManager with GameRoundsHandler {
         isHealthReducedForCurrentPlayer = activeSpecialMode.applyModeEffect(
             currentThrowingPlayer, player, isHealthReducedForCurrentPlayer);
         player.removePlayedCards();
+        player.removeSpecialModesUsed();
       }
     }
 
     currentThrowingPlayer.removePlayedCards();
+    currentThrowingPlayer.removeSpecialModesUsed();
 
     _currentTurnOffset = 0;
     _currentGameRound++;

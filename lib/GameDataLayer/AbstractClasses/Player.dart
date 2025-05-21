@@ -42,6 +42,14 @@ abstract class Player {
     _selectedCard = gameCard;
   }
 
+  void removeSpecialModesUsed(){
+    for(var mode in specialModes){
+      if(mode.isActiveNow){
+        mode.setUsed();
+      }
+    }
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
