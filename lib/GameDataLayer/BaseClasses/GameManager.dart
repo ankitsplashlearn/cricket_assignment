@@ -21,11 +21,13 @@ class GameManager with GameRoundsHandler {
   void enableSpecialModeForCurrentPlayer() {
     Player currentThrowingPlayer = getCurrentThrowingPlayer();
     currentThrowingPlayer.specialModes.first.activate();
-    print("${currentThrowingPlayer.name} activated ${currentThrowingPlayer.specialModes.first.modeName}");
+    print(
+        "${currentThrowingPlayer.name} activated ${currentThrowingPlayer.specialModes.first.modeName}");
   }
 
   @override
   void applyCurrentPlayerThrow() {
+    print("Card throw evaluation for round ${_currentGameRound}");
     bool isHealthReducedForCurrentPlayer = false;
     Player currentThrowingPlayer = getCurrentThrowingPlayer();
     bool isSpecialModeActive =
@@ -40,10 +42,15 @@ class GameManager with GameRoundsHandler {
         player.removePlayedCards();
         player.removeSpecialModesUsed();
       }
+
+      print("$player`s health: ${player.playerHealth.health}");
     }
 
     currentThrowingPlayer.removePlayedCards();
     currentThrowingPlayer.removeSpecialModesUsed();
+
+    print(
+        "$currentThrowingPlayer`s health: ${currentThrowingPlayer.playerHealth.health}");
 
     _currentTurnOffset = 0;
     _currentGameRound++;
@@ -52,24 +59,31 @@ class GameManager with GameRoundsHandler {
 
   @override
   void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute) {
-    getCurrentThrowingPlayer().addToSelectedCardAttribute(cardAttribute);
+    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    currentThrowingPlayer.addToSelectedCardAttribute(cardAttribute);
+    print(
+        "${currentThrowingPlayer.name} selected attribute ${cardAttribute.toString()}");
   }
 
   @override
   void selectCardForCurrentPlayer(GameCard gameCard) {
-    getCurrentThrowingPlayer().setSelectedCard(gameCard);
+    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    currentThrowingPlayer.setSelectedCard(gameCard);
+    print("${currentThrowingPlayer.name} selected card ${gameCard.toString()}");
   }
 
   @override
   void disableSpecialModeForCurrentPlayer() {
     Player currentThrowingPlayer = getCurrentThrowingPlayer();
     currentThrowingPlayer.specialModes.first.deActivate();
-    print("${currentThrowingPlayer.name} deactivated ${currentThrowingPlayer.specialModes.first.modeName}");
+    print(
+        "${currentThrowingPlayer.name} deactivated ${currentThrowingPlayer.specialModes.first.modeName}");
   }
 
   @override
   List<Player> evaluateRemainingPlayers() {
     _players.removeWhere((player) => player.playerHealth.health == 0);
+    print("${_players.length} players remaining");
     return _players;
   }
 
@@ -97,6 +111,8 @@ class GameManager with GameRoundsHandler {
   @override
   void moveToNextPlayerCardSelection() {
     _currentTurnOffset = (_currentTurnOffset + 1) % (_players.length);
+    print(
+        "Turn for ${_players[(_currentTurn + _currentTurnOffset) % _players.length].name}");
   }
 
   @override
