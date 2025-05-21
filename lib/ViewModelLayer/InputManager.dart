@@ -40,7 +40,7 @@ class InputManager with InputManagerMixin{
 
   @override
   Future<void> shuffleCards() async {
-    _gameManager.shuffleCards();
+    await _gameManager.shuffleCards();
   }
 
   @override
