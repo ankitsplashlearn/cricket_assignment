@@ -27,7 +27,7 @@ class GameManager with GameRoundsHandler {
 
   @override
   void applyCurrentRoundFirstPlayerThrow() {
-    print("Card throw evaluation for round ${_currentGameRound}");
+    print("Card throw evaluation for round ${_currentGameRound + 1}");
     bool isHealthReducedForCurrentPlayer = false;
     Player currentThrowingPlayer = getFirstThrowPlayerForCurrentRound();
     bool isSpecialModeActive =

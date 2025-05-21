@@ -207,10 +207,10 @@ class _GameScreenState extends State<GameScreen> {
                         return;
                       }
                       localSetState(() {
+                        _gameScreenController.inputManager
+                            .selectCardForCurrentPlayer(gameCard);
                         if (currentPlayer == firstThrowPlayer) {
                           cardSelected = true;
-                          _gameScreenController.inputManager
-                              .selectCardForCurrentPlayer(gameCard);
                         } else {
                           _moveToNextTurnOrRound();
                         }
