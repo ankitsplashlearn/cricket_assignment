@@ -113,8 +113,11 @@ List<Widget> gameCardsWidget({
 Widget gameCardWidget({
   required GameCard? gameCard,
   required Function(CardAttribute) attributeTapCallback,
+  List<CardAttribute>? selectedCardAttributes,
   bool attributeTapActive = false,
 }) {
+  List<CardAttribute> attributes = selectedCardAttributes ?? [];
+
   List<Widget> cardAttributeWidgets = [];
 
   if(gameCard == null){
@@ -124,6 +127,10 @@ Widget gameCardWidget({
 
   for (var entry in gameCard.attributes.entries) {
     CardAttribute attribute = entry.value;
+
+    if(attributes.contains(attribute)){
+      continue;
+    }
 
     Widget cardAttributeWidget = keyValueRichText(
       attribute.name,

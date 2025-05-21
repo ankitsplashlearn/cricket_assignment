@@ -7,7 +7,7 @@ class SuperMode extends SpecialMode {
   @override
   int get attributesCountAllowedToSelect => 1;
   @override
-  int get cardAttributedAvailableToSelect => 2;
+  int get cardAttributesAvailableToSelect => 2;
 
   @override
   bool applyModeEffect(Player player, Player otherPlayer,

@@ -28,6 +28,15 @@ abstract class CardAttribute {
   }
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is CardAttribute && runtimeType == other.runtimeType && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
+
+
+  @override
   String toString() {
     return "Card Attribute: name = $name, cardValue = ${cardValue.toString()}, cardComparator = ${cardComparator.toString()}";
   }

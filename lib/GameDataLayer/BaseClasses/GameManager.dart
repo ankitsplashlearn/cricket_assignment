@@ -19,7 +19,9 @@ class GameManager with GameRoundsHandler {
 
   @override
   void enableSpecialModeForCurrentPlayer() {
-    getCurrentThrowingPlayer().specialModes.first.activate();
+    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    currentThrowingPlayer.specialModes.first.activate();
+    print("${currentThrowingPlayer.name} activated ${currentThrowingPlayer.specialModes.first.modeName}");
   }
 
   @override
@@ -50,7 +52,7 @@ class GameManager with GameRoundsHandler {
 
   @override
   void selectCardAttributeForCurrentPlayer(CardAttribute cardAttribute) {
-    getCurrentThrowingPlayer().setSelectedCardAttribute(cardAttribute);
+    getCurrentThrowingPlayer().addToSelectedCardAttribute(cardAttribute);
   }
 
   @override
@@ -60,7 +62,9 @@ class GameManager with GameRoundsHandler {
 
   @override
   void disableSpecialModeForCurrentPlayer() {
-    getCurrentThrowingPlayer().specialModes.first.deActivate();
+    Player currentThrowingPlayer = getCurrentThrowingPlayer();
+    currentThrowingPlayer.specialModes.first.deActivate();
+    print("${currentThrowingPlayer.name} deactivated ${currentThrowingPlayer.specialModes.first.modeName}");
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/AiPlayer.dart';
@@ -81,8 +83,14 @@ class _GameScreenState extends State<GameScreen> {
         ),
         if (currentPlayer != firstThrowPlayer)
           keyValueRichText(
-            "Attribute selected by ${firstThrowPlayer.name}",
-            firstThrowPlayer.selectedCardAttribute?.name ?? "",
+            "Attributes selected by ${firstThrowPlayer.name}",
+            firstThrowPlayer.selectedCardAttributes
+                    .map((e) {
+                      e.name;
+                    })
+                    .toList()
+                    .toString() ??
+                "",
           ),
         if (currentPlayer != firstThrowPlayer &&
             firstThrowPlayer.specialModes.isNotEmpty &&
@@ -90,7 +98,8 @@ class _GameScreenState extends State<GameScreen> {
           keyValueRichText(
               "Special Mode Activated by ${firstThrowPlayer.name}: ",
               firstThrowPlayer.specialModes.first.modeName),
-        _specialModeWidget(currentPlayer),
+        if (currentPlayer == firstThrowPlayer)
+          _specialModeWidget(currentPlayer),
         Expanded(
           child: _cardsForCurrentThrowingPlayer(
             currentPlayer,
@@ -149,6 +158,8 @@ class _GameScreenState extends State<GameScreen> {
     Player firstThrowPlayer,
   ) {
     bool cardSelected = false;
+    int countCardAttributesAllowedToSelect =
+        currentPlayer.getCountCardAttributesAllowedToSelect();
     return StatefulBuilder(
       builder: (context, localSetState) {
         if (currentPlayer is AiPlayer && !cardSelected) {
@@ -161,20 +172,28 @@ class _GameScreenState extends State<GameScreen> {
             });
           });
         }
+        Player _currentThrowingPlayer = _gameScreenController.inputManager
+            .getCurrentThrowingPlayer();
+        List<CardAttribute> selectedCardAttributes = _currentThrowingPlayer.selectedCardAttributes;
         return cardSelected
             ? Center(
                 child: gameCardWidget(
-                  gameCard: _gameScreenController.inputManager
-                      .getCurrentThrowingPlayer()
-                      .selectedCard,
+                  gameCard: _currentThrowingPlayer.selectedCard,
+                  selectedCardAttributes: selectedCardAttributes,
                   attributeTapCallback: (cardAttribute) {
                     if (currentPlayer is AiPlayer) {
                       return;
                     }
-                    _gameScreenController.inputManager
-                        .selectCardAttributeForCurrentPlayer(cardAttribute);
+                    //reducing current counts
+                    countCardAttributesAllowedToSelect--;
+                    if(countCardAttributesAllowedToSelect > 0){
+                      localSetState((){});
+                    }else{
+                      _gameScreenController.inputManager
+                          .selectCardAttributeForCurrentPlayer(cardAttribute);
 
-                    _moveToNextTurnOrRound();
+                      _moveToNextTurnOrRound();
+                    }
                   },
                   attributeTapActive: true,
                 ),

@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/BaseClasses/PlayerHealth.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/SpecialMode/DefaultMode.dart';
 
 abstract class Player {
   int get id;
@@ -19,9 +22,6 @@ abstract class Player {
   GameCard? get selectedCard => _selectedCard;
   GameCard? _selectedCard;
 
-  CardAttribute? get selectedCardAttribute => _selectedCardAttribute;
-  CardAttribute? _selectedCardAttribute;
-
   List<CardAttribute> get selectedCardAttributes => _selectedCardAttributes;
   final List<CardAttribute> _selectedCardAttributes = [];
 
@@ -33,8 +33,7 @@ abstract class Player {
     _availableCards = gameCards;
   }
 
-  void setSelectedCardAttribute(CardAttribute cardAttribute) {
-    _selectedCardAttribute = cardAttribute;
+  void addToSelectedCardAttribute(CardAttribute cardAttribute) {
     _selectedCardAttributes.add(cardAttribute);
   }
 
@@ -48,6 +47,18 @@ abstract class Player {
         mode.setUsed();
       }
     }
+  }
+
+  int getCountCardAttributesAllowedToSelect(){
+    int result = DefaultMode().attributesCountAllowedToSelect;
+
+    for(var mode in specialModes){
+      if(mode.isActiveNow){
+        result = max(result, mode.attributesCountAllowedToSelect);
+      }
+    }
+
+    return result;
   }
 
   @override

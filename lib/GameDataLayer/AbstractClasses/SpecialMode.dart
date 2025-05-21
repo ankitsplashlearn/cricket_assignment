@@ -8,8 +8,6 @@ abstract class SpecialMode {
   bool _isUsed = false;
   bool _isActiveNow = false;
 
-  int get cardAttributedAvailableToSelect => 1;
-
   bool canBeUsed(Player player) {
     return !_isUsed;
   }
@@ -32,25 +30,29 @@ abstract class SpecialMode {
   }
 
   CardThrowResult cardThrowResult(Player currentPlayer, Player otherPlayer) {
-    //Current player cards will be prioritized to win
+    // Default to draw
     CardThrowResult result = CardThrowResult.draw;
 
-    //returning draw if any of the list is empty
-    if(otherPlayer.selectedCardAttributes.isEmpty || currentPlayer.selectedCardAttributes.isEmpty){
+    // Return draw if any attribute list is empty
+    if (currentPlayer.selectedCardAttributes.isEmpty || otherPlayer.selectedCardAttributes.isEmpty) {
       return result;
     }
 
-    //if any possibility exist to win then check
-    for (var attribute in currentPlayer.selectedCardAttributes) {
-      result = attribute.compareAttributes(otherPlayer.selectedCardAttributes.first);
-      if(result == CardThrowResult.win){
-        result = CardThrowResult.win;
-        break;
+    // Compare each attribute of current player with each of other player's attributes
+    for (var myAttr in currentPlayer.selectedCardAttributes) {
+      for (var otherAttr in otherPlayer.selectedCardAttributes) {
+        CardThrowResult compareResult = myAttr.compareAttributes(otherAttr);
+        if (compareResult == CardThrowResult.win) {
+          return CardThrowResult.win;
+        } else if (compareResult == CardThrowResult.loss) {
+          result = CardThrowResult.loss;
+        }
       }
     }
 
     return result;
   }
+
 
   //returns true if the current lost and false current player wins
   //this flag will be used further to check if the current players'
