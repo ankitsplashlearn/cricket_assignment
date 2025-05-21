@@ -7,7 +7,7 @@ enum AttributeEnum {
   wickets;
 
   static AttributeEnum fromString(String type) {
-    switch (type.toLowerCase()) {
+    switch (type) {
       case "Runs":
         return AttributeEnum.runs;
       case "Matches":

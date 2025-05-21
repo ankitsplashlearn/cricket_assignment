@@ -54,6 +54,8 @@ class AiPlayer extends Player with AiPlayerCardSelection{
       selectSpecialModeIfAny();
     }
     selectGameCard();
-    selectGameCardAttributes();
+    if(isCardAttributeSelecting){
+      selectGameCardAttributes();
+    }
   }
 }
