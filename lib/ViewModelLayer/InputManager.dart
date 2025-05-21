@@ -7,6 +7,8 @@ import 'package:cricket_card/ViewModelLayer/Mixins/InputManagerMixin.dart';
 class InputManager with InputManagerMixin{
   late GameManager _gameManager;
 
+  bool _isGameOver = false;
+
   InputManager({required GameManager gameManager}){
     _gameManager = gameManager;
   }
@@ -56,13 +58,31 @@ class InputManager with InputManagerMixin{
     if(_gameManager.isPlayerRemainingToThrowInCurrentRound()){
       _gameManager.moveToNextPlayerCardSelection();
     }else{
-      _gameManager.evaluateRemainingPlayers();
       _gameManager.applyCurrentPlayerThrow();
+      List<Player> players = _gameManager.evaluateRemainingPlayers();
+      if(players.length == 1 || players.isEmpty){
+        _isGameOver = true;
+      }
     }
   }
 
   @override
   int getCurrentRound() {
     return _gameManager.getCurrentRound();
+  }
+
+  @override
+  bool isGameOver() {
+    return _isGameOver;
+  }
+
+  @override
+  Player? getWinner() {
+    List<Player> winners = _gameManager.evaluateRemainingPlayers();
+    if(winners.isNotEmpty){
+      return winners.first;
+    }else{
+      return null;
+    }
   }
 }

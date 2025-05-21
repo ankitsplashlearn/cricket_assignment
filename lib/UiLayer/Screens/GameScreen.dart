@@ -1,6 +1,10 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
+import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
+import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/AiPlayer.dart';
 import 'package:cricket_card/UiLayer/ScreenControllers/GameScreenController.dart';
+import 'package:cricket_card/UiLayer/Screens/GameOverScreen.dart';
 import 'package:cricket_card/UiLayer/Util/CommonWidgets.dart';
+import 'package:cricket_card/UiLayer/Util/TextStyleUtil.dart';
 import 'package:cricket_card/ViewModelLayer/InputManager.dart';
 import 'package:flutter/material.dart';
 
@@ -47,12 +51,11 @@ class _GameScreenState extends State<GameScreen> {
       backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(color: Colors.black),
-        child:
-            _isGameDataLoaded
-                ? (_errorOccurredLoadingData
-                    ? Text("Something went wrong! Please restart the game.")
-                    : _currentPlayerView())
-                : Center(child: CircularProgressIndicator(color: Colors.white)),
+        child: _isGameDataLoaded
+            ? (_errorOccurredLoadingData
+                ? Text("Something went wrong! Please restart the game.")
+                : _currentPlayerView())
+            : Center(child: CircularProgressIndicator(color: Colors.white)),
       ),
     );
   }
@@ -81,6 +84,13 @@ class _GameScreenState extends State<GameScreen> {
             "Attribute selected by ${firstThrowPlayer.name}",
             firstThrowPlayer.selectedCardAttribute?.name ?? "",
           ),
+        if (currentPlayer != firstThrowPlayer &&
+            firstThrowPlayer.specialModes.isNotEmpty &&
+            firstThrowPlayer.specialModes.first.isActiveNow)
+          keyValueRichText(
+              "Special Mode Activated by ${firstThrowPlayer.name}: ",
+              firstThrowPlayer.specialModes.first.modeName),
+        _specialModeWidget(currentPlayer),
         Expanded(
           child: _cardsForCurrentThrowingPlayer(
             currentPlayer,
@@ -91,6 +101,49 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
+  Widget _specialModeWidget(Player currentPlayer) {
+    if (currentPlayer.specialModes.isEmpty) {
+      return SizedBox();
+    }
+    SpecialMode specialMode = currentPlayer.specialModes.first;
+    if (!specialMode.canBeUsed(currentPlayer)) {
+      return SizedBox();
+    }
+    bool isActive = specialMode.isActiveNow;
+    return StatefulBuilder(builder: (context, localSetState) {
+      return GestureDetector(
+        child: Container(
+          decoration:
+              BoxDecoration(color: isActive ? Colors.green : Colors.grey),
+          child: Text(
+            specialMode.modeName,
+            style: isActive
+                ? TextStyleUtil.whiteTextStyle(fontSize: fontSize)
+                : TextStyleUtil.blackTextStyle(fontSize: fontSize),
+          ),
+        ),
+        onTap: () {
+          localSetState(() {
+            isActive = !isActive;
+            if (isActive) {
+              _gameScreenController.inputManager
+                  .getCurrentThrowingPlayer()
+                  .specialModes
+                  .first
+                  .activate();
+            } else {
+              _gameScreenController.inputManager
+                  .getCurrentThrowingPlayer()
+                  .specialModes
+                  .first
+                  .deActivate();
+            }
+          });
+        },
+      );
+    });
+  }
+
   Widget _cardsForCurrentThrowingPlayer(
     Player currentPlayer,
     Player firstThrowPlayer,
@@ -98,44 +151,59 @@ class _GameScreenState extends State<GameScreen> {
     bool cardSelected = false;
     return StatefulBuilder(
       builder: (context, localSetState) {
+        if (currentPlayer is AiPlayer && !cardSelected) {
+          currentPlayer
+              .choseCardsAndAttributes(currentPlayer == firstThrowPlayer)
+              .then((_) {
+            if (!mounted) return;
+            localSetState(() {
+              _moveToNextTurnOrRound();
+            });
+          });
+        }
         return cardSelected
             ? Center(
-              child: gameCardWidget(
-                gameCard:
+                child: gameCardWidget(
+                  gameCard: _gameScreenController.inputManager
+                      .getCurrentThrowingPlayer()
+                      .selectedCard,
+                  attributeTapCallback: (cardAttribute) {
+                    if (currentPlayer is AiPlayer) {
+                      return;
+                    }
                     _gameScreenController.inputManager
-                        .getCurrentThrowingPlayer()
-                        .selectedCard,
-                attributeTapCallback: (cardAttribute) {
-                  _gameScreenController.inputManager
-                      .selectCardAttributeForCurrentPlayer(cardAttribute);
+                        .selectCardAttributeForCurrentPlayer(cardAttribute);
 
-                  _moveToNextTurnOrRound();
-                },
-                attributeTapActive: true,
-              ),
-            )
-            : SingleChildScrollView(
-              child: Wrap(
-                spacing: 8,
-                alignment: WrapAlignment.start,
-                runSpacing: 8,
-                runAlignment: WrapAlignment.start,
-                children: gameCardWidgets(
-                  gameCards: currentPlayer.availableCards,
-                  cardTapCallback: (gameCard) {
-                    localSetState(() {
-                      if (currentPlayer == firstThrowPlayer) {
-                        cardSelected = true;
-                        _gameScreenController.inputManager
-                            .selectCardForCurrentPlayer(gameCard);
-                      } else {
-                        _moveToNextTurnOrRound();
-                      }
-                    });
+                    _moveToNextTurnOrRound();
                   },
+                  attributeTapActive: true,
                 ),
-              ),
-            );
+              )
+            : SingleChildScrollView(
+                child: Wrap(
+                  spacing: 8,
+                  alignment: WrapAlignment.start,
+                  runSpacing: 8,
+                  runAlignment: WrapAlignment.start,
+                  children: gameCardsWidget(
+                    gameCards: currentPlayer.availableCards,
+                    cardTapCallback: (gameCard) {
+                      if (currentPlayer is AiPlayer) {
+                        return;
+                      }
+                      localSetState(() {
+                        if (currentPlayer == firstThrowPlayer) {
+                          cardSelected = true;
+                          _gameScreenController.inputManager
+                              .selectCardForCurrentPlayer(gameCard);
+                        } else {
+                          _moveToNextTurnOrRound();
+                        }
+                      });
+                    },
+                  ),
+                ),
+              );
       },
     );
   }
@@ -143,6 +211,17 @@ class _GameScreenState extends State<GameScreen> {
   void _moveToNextTurnOrRound() {
     //This step is responsible for moving to next player throw or next round
     _gameScreenController.inputManager.moveToNextApplicableStep();
-    setState(() {});
+    if (_gameScreenController.inputManager.isGameOver()) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GameOverScreen(
+              winningPlayer: _gameScreenController.inputManager.getWinner(),
+            ),
+          ),
+          (Route<dynamic> route) => false);
+    } else {
+      setState(() {});
+    }
   }
 }

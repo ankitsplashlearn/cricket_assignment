@@ -1,6 +1,8 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
+import 'package:cricket_card/GameDataLayer/Extensions/PlayerExtension.dart';
+import 'package:cricket_card/GameDataLayer/Util/DeckUtil.dart';
 
 class SuperMode extends SpecialMode {
   @override
@@ -34,7 +36,10 @@ class SuperMode extends SpecialMode {
 
   @override
   bool canBeUsed(Player player) {
-    //TODO check if the player has highest runs card and highest wickets card
-    return super.canBeUsed(player);
+    if(player.hasHighestRunsCard() && player.hasHighestWicketsCard()){
+      return super.canBeUsed(player);
+    }else{
+      return false;
+    }
   }
 }

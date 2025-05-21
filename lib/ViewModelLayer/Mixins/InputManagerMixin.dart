@@ -13,4 +13,6 @@ mixin InputManagerMixin{
   Player getFirstThrowPlayerForCurrentRound();
   void moveToNextApplicableStep();
   int getCurrentRound();
+  bool isGameOver();
+  Player? getWinner();
 }

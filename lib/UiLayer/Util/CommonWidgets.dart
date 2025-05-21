@@ -87,7 +87,7 @@ Widget buildPlayerForm(
   );
 }
 
-List<Widget> gameCardWidgets({
+List<Widget> gameCardsWidget({
   required List<GameCard> gameCards,
   required Function(GameCard) cardTapCallback,
 }) {
