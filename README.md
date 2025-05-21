@@ -1,16 +1,21 @@
-# cricket_card
+Cricket card game in flutter.
 
-A new Flutter project.
+Supports Player vs Computer and Player vs Player mode.
+Code written to handle multiple players (more than 2 player - having multiple computer and human players at once)
+AI difficulty is scalable.
+Game Manager could be over-written with new game mechanics.
+Card attributes scalable.
+Card attribute selection count is scalable.
+Card attribute can handle various types(like dob) with custom compare mechanism.
 
-## Getting Started
+Project Blueprint
 
-This project is a starting point for a Flutter application.
+GameUI => InputManager (Viewmodel kind of) => GameManager (all logic here)
 
-A few resources to get you started if this is your first Flutter project:
+GameManager has List<Player>
+Every Player has List<GameCard>, List<SpecialMode>, PlayerHealth
+Every GameCard has List<CardAttribute>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+AiPlayer and HumanPlayer extend Player class
+CricketGameCard extend GameCard
+All card attributes (like Runs, Catches, Wickets, Centuries, Half Centuries) extend CardAttribute
