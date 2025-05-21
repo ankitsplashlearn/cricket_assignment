@@ -136,17 +136,11 @@ class _GameScreenState extends State<GameScreen> {
           localSetState(() {
             isActive = !isActive;
             if (isActive) {
-              _gameScreenController.inputManager
-                  .getCurrentThrowingPlayer()
-                  .specialModes
-                  .first
-                  .activate();
+              _gameScreenController
+                  .inputManager.enableSpecialModeForCurrentPlayer;
             } else {
               _gameScreenController.inputManager
-                  .getCurrentThrowingPlayer()
-                  .specialModes
-                  .first
-                  .deActivate();
+                  .disableSpecialModeForCurrentPlayer();
             }
           });
         },
@@ -184,8 +178,10 @@ class _GameScreenState extends State<GameScreen> {
                     }
                     //reducing current counts
                     _gameScreenController.inputManager
-                          .selectCardAttributeForCurrentPlayer(cardAttribute);
-                    if (_currentThrowingPlayer.getCountCardAttributesAllowedToSelect() > 0) {
+                        .selectCardAttributeForCurrentPlayer(cardAttribute);
+                    if (_currentThrowingPlayer
+                            .getCountCardAttributesAllowedToSelect() >
+                        0) {
                       localSetState(() {});
                     } else {
                       _moveToNextTurnOrRound();

@@ -1,5 +1,6 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/UiLayer/Screens/GameModeSelectionScreen.dart';
+import 'package:cricket_card/UiLayer/Util/TextStyleUtil.dart';
 import 'package:flutter/material.dart';
 
 class GameOverScreen extends StatefulWidget {
@@ -15,21 +16,23 @@ class _GameOverScreenState extends State<GameOverScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Text("Game Over"),
-          Text("${widget.winningPlayer?.name ?? "NA"} won!"),
-          TextButton(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GameModeSelectionScreen(),
-                    ),
-                    (_) => false);
-              },
-              child: Text("Go to Homepage"))
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            Text("Game Over", style: TextStyleUtil.whiteTextStyle(fontSize: 32),),
+            Text("${widget.winningPlayer?.name ?? "NA"} won!", style: TextStyleUtil.yellowTextStyle(fontSize: 48)),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GameModeSelectionScreen(),
+                      ),
+                      (_) => false);
+                },
+                child: Text("Go to Homepage", style: TextStyleUtil.whiteTextStyle(fontSize: 48)))
+          ],
+        ),
       ),
     );
   }

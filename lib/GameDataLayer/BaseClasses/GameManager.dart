@@ -78,8 +78,28 @@ class GameManager with GameRoundsHandler {
 
   @override
   List<Player> evaluateRemainingPlayers() {
-    _players.removeWhere((player) =>
-        player.playerHealth.health == 0 || player.availableCards.isEmpty);
+    // removing players with 0 health
+    _players.removeWhere((player) => player.playerHealth.health == 0);
+
+    // if any player still have cards
+    bool anyPlayerHasCards = _players.any((player) => player.availableCards.isNotEmpty);
+
+    if(anyPlayerHasCards){
+      // If at least one has cards, remove those with empty cards
+      _players.removeWhere((player) => player.availableCards.isEmpty);
+    }else {
+      double highestHealth = 0;
+      Player player = _players.first;
+      for(var p in _players){
+        if(p.playerHealth.health > highestHealth){
+          highestHealth = p.playerHealth.health;
+          player = p;
+        }
+      }
+
+      _players.removeWhere((p){return p != player;});
+    }
+
     print("${_players.length} players remaining");
     return _players;
   }
