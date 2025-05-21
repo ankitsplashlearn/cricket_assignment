@@ -25,4 +25,13 @@
 
 ## Improvement Areas
 - Although it is maintained to use OOPs and SOLID principles as best as possible, there are places where improvements are needed.
+- For now AI mode is random, but it could be improved as easy, moderate and difficult one also by using Greedy or Breadth First or Depth First like approaches, and it won't take much effort.
 - GameManager is used for game mechanics scalability, but online multiplayer needs to tweek some changes more than expected. This part could have been planned better in designing phase.
+- UI could have been improved better, but for time being it is set as bare minimum. Although logs could be used to get more information of the game rounds.
+
+# How to run this application?
+- Clone the project using git.
+- Flutter should be installed on the system.
+- Open the project in vscode or Android Studio.
+- Run command flutter run -d chrome or use the run button provided by the respective IDE.
+- Enjoy playing game against the Computer.
