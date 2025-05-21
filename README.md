@@ -34,4 +34,4 @@
 - Flutter should be installed on the system.
 - Open the project in vscode or Android Studio.
 - Run command flutter run -d chrome or use the run button provided by the respective IDE.
-- Enjoy playing game against the Computer.
+- Enjoy playing game against the Computer or with any colleague.
