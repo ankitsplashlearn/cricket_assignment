@@ -85,4 +85,9 @@ class InputManager with InputManagerMixin{
       return null;
     }
   }
+
+  @override
+  List<Player> getAllPlayers() {
+    return _gameManager.getAllPlayers();
+  }
 }

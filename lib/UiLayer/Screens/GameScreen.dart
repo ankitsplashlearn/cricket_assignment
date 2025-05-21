@@ -107,7 +107,32 @@ class _GameScreenState extends State<GameScreen> {
             firstThrowPlayer,
           ),
         ),
+        _otherPlayersHealthWidget()
       ],
+    );
+  }
+
+  Widget _otherPlayersHealthWidget() {
+    List<Widget> healthWidgets = [];
+
+    for (var player in _gameScreenController.inputManager.getAllPlayers()) {
+      healthWidgets.add(Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          keyValueRichText("Player name", player.name),
+          keyValueRichText(
+            "Health",
+            player.playerHealth.health.toString(),
+          ),
+        ],
+      ));
+    }
+
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: healthWidgets,
     );
   }
 
@@ -136,8 +161,8 @@ class _GameScreenState extends State<GameScreen> {
           localSetState(() {
             isActive = !isActive;
             if (isActive) {
-              _gameScreenController
-                  .inputManager.enableSpecialModeForCurrentPlayer();
+              _gameScreenController.inputManager
+                  .enableSpecialModeForCurrentPlayer();
             } else {
               _gameScreenController.inputManager
                   .disableSpecialModeForCurrentPlayer();

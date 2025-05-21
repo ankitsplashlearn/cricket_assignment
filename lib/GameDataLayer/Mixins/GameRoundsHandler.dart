@@ -14,4 +14,5 @@ mixin GameRoundsHandler {
   Player firstThrowPlayerForCurrentRound();
   bool isPlayerRemainingToThrowInCurrentRound();
   int getCurrentRound();
+  List<Player> getAllPlayers();
 }

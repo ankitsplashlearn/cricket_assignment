@@ -160,4 +160,9 @@ class GameManager with GameRoundsHandler {
   int getCurrentRound() {
     return _currentGameRound + 1;
   }
+
+  @override
+  List<Player> getAllPlayers() {
+    return _players;
+  }
 }

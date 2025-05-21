@@ -15,4 +15,5 @@ mixin InputManagerMixin{
   int getCurrentRound();
   bool isGameOver();
   Player? getWinner();
+  List<Player> getAllPlayers();
 }
