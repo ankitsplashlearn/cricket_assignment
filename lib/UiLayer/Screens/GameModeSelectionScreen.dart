@@ -3,7 +3,6 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/BaseClasses/PlayerHealth.dart';
 import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/AiPlayer.dart';
 import 'package:cricket_card/GameDataLayer/DerivedClasses/Player/HumanPlayer.dart';
-import 'package:cricket_card/GameDataLayer/DerivedClasses/SpecialMode/FreeHitMode.dart';
 import 'package:cricket_card/GameDataLayer/Util/SpecialModeUtil.dart';
 import 'package:cricket_card/UiLayer/Enums/GameModeEnum.dart';
 import 'package:cricket_card/UiLayer/Enums/GameSetupPhaseEnum.dart';

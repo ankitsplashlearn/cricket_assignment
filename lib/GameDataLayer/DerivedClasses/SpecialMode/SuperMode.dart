@@ -2,7 +2,6 @@ import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/SpecialMode.dart';
 import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 import 'package:cricket_card/GameDataLayer/Extensions/PlayerExtension.dart';
-import 'package:cricket_card/GameDataLayer/Util/DeckUtil.dart';
 
 class SuperMode extends SpecialMode {
   @override

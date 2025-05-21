@@ -1,8 +1,6 @@
 import 'package:cricket_card/GameDataLayer/AbstractClasses/CardAttribute.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/GameCard.dart';
 import 'package:cricket_card/GameDataLayer/AbstractClasses/Player.dart';
-import 'package:cricket_card/GameDataLayer/Enums/CardComparator.dart';
-import 'package:cricket_card/GameDataLayer/Enums/CardThrowResult.dart';
 
 mixin GameRoundsHandler {
   void selectCardForCurrentPlayer(GameCard gameCard);
